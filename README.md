@@ -51,35 +51,6 @@ The tool uses a deterministic scoring system that evaluates URLs based on:
 - Safari 12+
 - Edge 79+
 
-## 🎨 Customization
-
-### Branding
-Update the header title and tagline in `index.html`:
-```html
-<h1>Your Company Name</h1>
-<p class="tagline">Your custom tagline here</p>
-```
-
-### Scoring Factors
-Modify the scoring weights in `app.js`:
-```javascript
-const aeoFactors = {
-  contentStructure: { name: 'Content Structure', weight: 25, checks: [...] },
-  // Adjust weights as needed
-};
-```
-
-### Styling
-The CSS uses custom properties for easy theming:
-```css
-:root {
-  --c-brand: #0B8A94;
-  --c-accent: #1ECAD7;
-  --c-ink: #142129;
-  /* Modify colors here */
-}
-```
-
 ## 🔒 Privacy & Security
 
 - **No Server Communication**: All analysis happens client-side

@@ -1,6 +1,6 @@
 # Precision AEO Website Grader
 
-A comprehensive Answer Engine Optimization (AEO) analysis tool specifically designed for healthcare and life sciences companies. This tool helps pharma companies optimize their content for AI-powered search engines like ChatGPT, Claude, Perplexity, and Google's AI.
+A comprehensive Answer Engine Optimization (AEO) analysis tool specifically designed for healthcare and life sciences companies. This tool helps pharma companies optimize their content for AI‑powered search engines like Claude, Perplexity, and Google's AI.
 
 ## 🎯 Purpose
 

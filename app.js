@@ -48,6 +48,16 @@ const aeoFactors = {
   userExperience: { name: 'User Experience', weight: 10, checks: ['Easy navigation','Readable typography','Accessible design','Contact information'] },
 };
 
+// Definitions for each AEO category used for tooltip descriptions on the results page
+const categoryDescriptions = {
+  contentStructure: 'The way your website’s headings, subheadings, and sections are organized to improve clarity and crawlability.',
+  authoritySignals: 'Indicators like backlinks, citations, and expertise that show search engines your site is trustworthy.',
+  technicalOptimization: 'Behind-the-scenes improvements (speed, schema markup, mobile readiness) that help search engines access and understand your site.',
+  contentClarity: 'Writing and formatting information so it is clear, direct, and easy for both users and algorithms to understand.',
+  ymylCompliance: 'Ensuring content meets Google’s “Your Money or Your Life” standards for accuracy, safety, and trustworthiness in sensitive topics.',
+  userExperience: 'How easy, helpful, and enjoyable your website feels for visitors, from navigation to readability.'
+};
+
 // Healthcare content analysis keywords
 const healthcareKeywords = {
   drugs: ['medication', 'drug', 'treatment', 'therapy', 'pharmaceutical', 'dosage', 'prescription'],
@@ -828,149 +838,176 @@ function getScoreDescription(score){
   return 'Critical issues detected. Significant AEO work needed for AI search visibility.';
 }
 
-// ACCORDION & UI INTERACTIONS
-
-function toggleSection(id){
-  const content = document.getElementById(id);
-  const button = document.querySelector(`[aria-controls="${id}"]`);
-  const icon = document.getElementById(id + '-icon');
-  const expanded = button.getAttribute('aria-expanded')==='true';
-  if(expanded){ 
-    content.classList.remove('active'); 
-    button.setAttribute('aria-expanded','false'); 
-    icon.textContent='+'; 
-    icon.classList.remove('active'); 
-  }
-  else { 
-    content.classList.add('active'); 
-    button.setAttribute('aria-expanded','true'); 
-    icon.textContent='−'; 
-    icon.classList.add('active'); 
-  }
-}
-
-document.addEventListener('keydown', (e)=>{
-  if(e.target.classList.contains('info-header') && (e.key==='Enter' || e.key===' ')){
-    e.preventDefault(); 
-    e.target.click();
-  }
-});
-
-function scrollToTop(){ 
-  window.scrollTo({top:0,behavior:'smooth'}); 
-}
-
 // PDF GENERATION
 
 function downloadPDF(){
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  const primary=[35,206,217], accent=[252,164,124], text=[44,62,80];
-  
-  // Header
-  doc.setFillColor(...primary); 
-  doc.rect(0,0,210,40,'F');
-  doc.setTextColor(255,255,255); 
-  doc.setFontSize(24); 
-  doc.setFont('helvetica','bold'); 
-  doc.text('AEO Website Analysis Report',20,25);
-  doc.setFontSize(12); 
-  doc.setFont('helvetica','normal'); 
-  doc.text('Healthcare & Life Sciences Optimization Analysis',20,32);
-  
-  // Analysis overview
-  doc.setTextColor(...text); 
-  doc.setFontSize(14); 
-  doc.setFont('helvetica','bold'); 
-  doc.text('Analysis Overview',20,55);
-  doc.setFontSize(11); 
-  doc.setFont('helvetica','normal'); 
-  doc.text(`Website: ${currentUrl}`,20,65); 
-  doc.text(`Analysis Date: ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}`,20,72);
-  
-  // Add real data indicator
-  if (realAnalysisData) {
-    doc.text('✓ Enhanced with real website data',20,79);
-  } else {
-    doc.text('⚡ Rapid assessment based on domain analysis',20,79);
-  }
-  
-  // Score display
+  const doc = new jsPDF({ unit: 'mm', format: 'letter', compress: true });
+  const primary = [35,206,217];
+  const accent  = [252,164,124];
+  const text    = [44,62,80];
+
+  // Page metrics
+  const pageWidth  = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  // Use 0.75 inch margins (~19mm) to fit more content on the first page
+  const margin     = 19;
+
   const score = currentAnalysis.overall;
-  let color = accent; 
-  if(score>=80) color=[249,215,121]; 
-  if(score>=90) color=[161,204,166];
-  doc.setFillColor(...color); 
-  doc.roundedRect(20,90,50,20,3,3,'F'); 
-  doc.setTextColor(255,255,255); 
-  doc.setFontSize(16); 
-  doc.setFont('helvetica','bold'); 
-  doc.text(`${score}/100`,45,103);
-  doc.setTextColor(...text); 
-  doc.setFontSize(12); 
-  doc.text('Overall AEO Score',80,98); 
-  doc.setFontSize(10); 
-  doc.text(getScoreDescription(score),80,105);
-  
-  // Category performance
-  doc.setFontSize(14); 
-  doc.setFont('helvetica','bold'); 
-  doc.text('Category Performance',20,125);
-  let y=135;
-  
-  Object.keys(aeoFactors).forEach((key)=>{
-    const factor = aeoFactors[key]; 
+  // Determine score color
+  let scoreColor = accent;
+  if (score >= 90) scoreColor = [161,204,166];
+  else if (score >= 80) scoreColor = [249,215,121];
+
+  // Header background
+  doc.setFillColor(...primary);
+  doc.rect(0, 0, pageWidth, 30, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(24);
+  // Main heading centered
+  doc.text('Precision AEO', pageWidth/2, 18, { align: 'center' });
+  doc.setFontSize(12);
+  doc.setFont('helvetica','normal');
+  // Subheadline with domain
+  const domain = currentUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  doc.text(`Report Generated for ${domain}`, pageWidth/2, 26, { align: 'center' });
+
+  // Score box: enlarge and ensure the score text is centered vertically
+  const rectWidth = 80;
+  const rectHeight = 30;
+  const rectX = (pageWidth - rectWidth) / 2;
+  const rectY = margin + 10;
+  doc.setFillColor(...scoreColor);
+  doc.roundedRect(rectX, rectY, rectWidth, rectHeight, 3, 3, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(22);
+  // Place the score roughly at the vertical center of the rectangle
+  doc.text(`${score}/100`, pageWidth/2, rectY + rectHeight/2 + 7, { align: 'center' });
+  // Label under score
+  doc.setTextColor(...text);
+  doc.setFontSize(14);
+  doc.text('Overall AEO Analysis', pageWidth/2, rectY + rectHeight + 14, { align: 'center' });
+  // Score description
+  const description = getScoreDescription(score);
+  const descLines = doc.splitTextToSize(description, pageWidth - margin*2);
+  doc.setFontSize(10);
+  doc.text(descLines, pageWidth/2, rectY + rectHeight + 20, { align: 'center' });
+
+  // Category Performance header
+  let y = rectY + rectHeight + 40;
+  doc.setFontSize(14);
+  doc.setFont('helvetica','bold');
+  doc.text('Category Performance', margin, y);
+  y += 8;
+
+  // Draw each category bar
+  Object.keys(aeoFactors).forEach((key) => {
+    const factor = aeoFactors[key];
     const s = Math.round(currentAnalysis.categories[key]);
-    doc.setFontSize(11); 
-    doc.setFont('helvetica','bold'); 
-    doc.text(factor.name,25,y);
-    
-    const barW=100, fillW=(s/100)*barW;
-    doc.setFillColor(240,240,240); 
-    doc.rect(25,y+2,barW,6,'F');
-    let barColor=accent; 
-    if(s>=80) barColor=[161,204,166]; 
-    else if(s>=60) barColor=[249,215,121];
-    doc.setFillColor(...barColor); 
-    doc.rect(25,y+2,fillW,6,'F');
-    doc.setTextColor(...text); 
-    doc.setFont('helvetica','normal'); 
-    doc.text(`${s}/100`,135,y+6); 
-    doc.setFontSize(9); 
-    doc.text(`(${factor.weight}% weight)`,160,y+6);
-    y+=15;
+    doc.setFontSize(11);
+    doc.setFont('helvetica','bold');
+    doc.setTextColor(...text);
+    doc.text(factor.name, margin + 5, y);
+    // Bars
+    const barWidth = 100;
+    const barHeight = 6;
+    const barX = margin + 5;
+    const barY = y + 2;
+    doc.setFillColor(240,240,240);
+    doc.rect(barX, barY, barWidth, barHeight, 'F');
+    // Determine bar color
+    let barColor = accent;
+    if (s >= 90) barColor = [161,204,166];
+    else if (s >= 80) barColor = [249,215,121];
+    doc.setFillColor(...barColor);
+    doc.rect(barX, barY, (s/100) * barWidth, barHeight, 'F');
+    // Score text and weight
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(...text);
+    doc.text(`${s}/100`, margin + barWidth + 20, y + 6);
+    doc.setFontSize(9);
+    doc.text(`(${factor.weight}% weight)`, margin + barWidth + 45, y + 6);
+    y += 15;
   });
-  
-  // Recommendations
-  y+=10; 
-  doc.setFontSize(14); 
-  doc.setFont('helvetica','bold'); 
-  doc.text('Priority Recommendations',20,y); 
-  y+=10;
-  
+
+  // Priority Recommendations
+  y += 5;
+  doc.setFontSize(14);
+  doc.setFont('helvetica','bold');
+  doc.text('Priority Recommendations', margin, y);
+  y += 8;
   const recs = generateEnhancedRecommendations(currentAnalysis, realAnalysisData);
-  recs.slice(0,6).forEach((rec,i)=>{
-    doc.setFontSize(10); 
-    doc.setFont('helvetica','normal'); 
-    doc.setFillColor(...primary); 
-    doc.circle(22,y-1,1.5,'F');
-    const lines = doc.splitTextToSize(`${i+1}. ${rec}`,165); 
-    doc.text(lines,27,y); 
-    y += lines.length*4 + 3; 
-    if(y>260){ doc.addPage(); y=20; }
+  recs.slice(0, 6).forEach((rec, i) => {
+    doc.setFontSize(10);
+    doc.setFont('helvetica','normal');
+    // bullet circle
+    doc.setFillColor(...primary);
+    doc.circle(margin + 2, y - 2, 1.5, 'F');
+    const lines = doc.splitTextToSize(`${i + 1}. ${rec}`, pageWidth - margin*2 - 10);
+    doc.text(lines, margin + 7, y);
+    y += lines.length * 4 + 3;
+    if (y > pageHeight - margin - 20) {
+      doc.addPage();
+      y = margin;
+    }
   });
-  
-  // Footer
-  const pages = doc.internal.getNumberOfPages();
-  for(let i=1;i<=pages;i++){ 
-    doc.setPage(i); 
-    doc.setFontSize(8); 
-    doc.setTextColor(150,150,150); 
-    doc.text('Generated by Precision AEO - Healthcare & Life Sciences Optimization',20,285); 
-    doc.text(`Page ${i} of ${pages}`,180,285); 
+
+  // Always add a second page for glossary
+  doc.addPage();
+  // Key Terms header on new page
+  let y2 = margin;
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(16);
+  doc.setTextColor(...text);
+  doc.text('📖 Key Terms', pageWidth / 2, y2, { align: 'center' });
+  y2 += 10;
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(11);
+  const glossary = [
+    { term: 'Answer Engine Optimization (AEO)', definition: 'The practice of structuring your website so AI-driven search engines and answer engines can easily understand and surface your content.' },
+    { term: 'Content Structure', definition: 'The way your website’s headings, subheadings, and sections are organized to improve clarity and crawlability.' },
+    { term: 'Authority Signals', definition: 'Indicators like backlinks, citations, and expertise that show search engines your site is trustworthy.' },
+    { term: 'Technical Optimization', definition: 'Behind-the-scenes improvements (speed, schema markup, mobile readiness) that help search engines access and understand your site.' },
+    { term: 'Content Clarity', definition: 'Writing and formatting information so it is clear, direct, and easy for both users and algorithms to understand.' },
+    { term: 'YMYL Compliance', definition: 'Ensuring content meets Google’s “Your Money or Your Life” standards for accuracy, safety, and trustworthiness in sensitive topics.' },
+    { term: 'User Experience (UX)', definition: 'How easy, helpful, and enjoyable your website feels for visitors, from navigation to readability.' },
+    { term: 'Featured Snippets', definition: 'Short highlighted answers at the top of Google results, often pulled from well-structured AEO content.' },
+    { term: 'Schema Markup', definition: 'A type of structured data code that helps search engines interpret and display your content more effectively.' },
+    { term: 'E-E-A-T', definition: 'Google’s quality framework: Experience, Expertise, Authoritativeness, and Trustworthiness.' },
+    { term: 'Knowledge Graph', definition: 'Google’s database of interconnected facts that powers quick answers and information panels.' },
+    { term: 'Search Intent', definition: 'The underlying reason a user makes a query (informational, transactional, navigational), which guides how you should structure your content.' }
+  ];
+  glossary.forEach(({ term, definition }) => {
+    // Term bold
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(11);
+    doc.text(term, margin, y2);
+    y2 += 5;
+    doc.setFont('helvetica','normal');
+    const defLines = doc.splitTextToSize(definition, pageWidth - margin*2);
+    doc.text(defLines, margin, y2);
+    y2 += defLines.length * 5 + 3;
+    // Check if near bottom of page
+    if (y2 > pageHeight - margin - 20) {
+      doc.addPage();
+      y2 = margin;
+    }
+  });
+
+  // Footer for each page
+  const totalPages = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(150,150,150);
+    doc.text('Generated by Precision AEO', margin, pageHeight - 10);
+    doc.text(`Page ${i} of ${totalPages}`, pageWidth - margin, pageHeight - 10, { align: 'right' });
   }
-  
-  const fname = `AEO-Report-${currentUrl.replace(/https?:\/\//,'').replace(/\W/g,'-')}.pdf`; 
+
+  const fname = `AEO-Report-${currentUrl.replace(/https?:\/\//,'').replace(/\W/g,'-')}.pdf`;
   doc.save(fname);
 }
 
@@ -986,12 +1023,15 @@ document.getElementById('grader-form').addEventListener('submit', async (e)=>{
     currentUrl = normalized;
     currentEmail = emailVal; // Store for lead capture
     
-    // Hide form and show loading
-    setDisplayById('form-section','none');
-    setDisplayById('features-section','none');
-    setDisplayById('info-sections','none'); 
-    setDisplayById('faq','none');
-    setDisplayById('cta-section','none');
+    // Add analysis state: lock scroll and hide underlying content
+    document.body.classList.add('is-analyzing');
+    const mainEl = document.getElementById('main-content');
+    if (mainEl) {
+      mainEl.setAttribute('aria-hidden','true');
+      // Do not hide the container visually; overlay will cover it
+      if ('inert' in mainEl) { try { mainEl.inert = true; } catch(e) {} }
+    }
+    // Show loading overlay
     setDisplayById('loading','block');
     
     // Update loading message for real analysis
@@ -1057,8 +1097,28 @@ document.getElementById('grader-form').addEventListener('submit', async (e)=>{
     
     // Display results
     displayResults(scores);
-    setDisplayById('loading','none'); 
+    // Hide loading overlay and show results
+    setDisplayById('loading','none');
+    // Restore main content and remove analysis state
+    const mainContainer = document.getElementById('main-content');
+    if (mainContainer) {
+      mainContainer.removeAttribute('aria-hidden');
+      if ('inert' in mainContainer) { try { mainContainer.inert = false; } catch(e) {} }
+    }
     setDisplayById('results','block');
+    document.body.classList.remove('is-analyzing');
+    // Switch body class from home to results to allow contact link
+    document.body.classList.remove('home');
+    document.body.classList.add('results');
+
+    // Warn users before navigating away from the results page
+    window.addEventListener('beforeunload', function (e) {
+      // If on results page, prompt confirmation before leaving
+      if (document.body.classList.contains('results')) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
     
     // Show analysis details if we got real data
     if (realAnalysisData && (realAnalysisData.contentAnalysis || realAnalysisData.pageSpeedData)) {
@@ -1071,11 +1131,6 @@ document.getElementById('grader-form').addEventListener('submit', async (e)=>{
       });
     }
     
-    // Scroll to results
-    setTimeout(() => {
-      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
-    
   } catch(err){
     console.error('Analysis error:', err);
     
@@ -1084,24 +1139,26 @@ document.getElementById('grader-form').addEventListener('submit', async (e)=>{
     
     // Create error display
     const errorHtml = `
-      <div class="error-message" style="background: #fee; border: 1px solid #fcc; border-radius: 12px; padding: 30px; text-align: center; margin: 20px 0;">
-        <h3 style="color: #c33; margin-bottom: 15px;">⚠️ Analysis Error</h3>
-        <p style="color: #666; margin-bottom: 20px;">
-          We encountered an issue analyzing your website. This could be due to:
-        </p>
-        <ul style="color: #666; text-align: left; display: inline-block; margin-bottom: 20px;">
-          <li>Website access restrictions</li>
-          <li>Invalid URL format</li>
-          <li>Temporary connectivity issues</li>
-        </ul>
-        <button onclick="location.reload()" style="background: #23CED9; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600;">
-          Try Again
-        </button>
+      <div class="error-message" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: white; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 40px;">
+        <div style="text-align: center; max-width: 500px;">
+          <h3 style="color: #e63946; margin-bottom: 15px;">⚠️ Analysis Error</h3>
+          <p style="color: #666; margin-bottom: 20px;">
+            We encountered an issue analyzing your website. This could be due to:
+          </p>
+          <ul style="color: #666; text-align: left; display: inline-block; margin-bottom: 20px;">
+            <li>Website access restrictions</li>
+            <li>Invalid URL format</li>
+            <li>Temporary connectivity issues</li>
+          </ul>
+          <button onclick="location.reload()" style="background: #7fb069; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            Try Again
+          </button>
+        </div>
       </div>
     `;
     
-    // Show error in main card
-    document.querySelector('.main-card').innerHTML = errorHtml;
+    // Show error as full-screen overlay
+    document.body.insertAdjacentHTML('beforeend', errorHtml);
     
     // Show form again after 5 seconds
     setTimeout(() => {
@@ -1129,7 +1186,10 @@ function displayResults(scores){
     const card = document.createElement('div'); 
     card.className='category';
     card.innerHTML = `
-      <h3>${factor.name}<span class="category-score">${val}/100</span></h3>
+      <h3>${factor.name}
+        <span class="category-score">${val}/100</span>
+        <span class="info-icon" tabindex="0" role="button" aria-label="${factor.name} definition" data-description="${categoryDescriptions[key]}">ℹ️</span>
+      </h3>
       <div class="category-details">
         <p><strong>Impact:</strong> ${factor.weight}% of overall AEO score</p>
       </div>
@@ -1210,15 +1270,7 @@ function displayAnalysisDetails(realData) {
   checksContainer.innerHTML = checksHtml;
   detailsContainer.style.display = 'block';
   
-  // Add a note about analysis method
-  if (!realData.pageSpeedData && !realData.contentAnalysis) {
-    checksContainer.insertAdjacentHTML('afterend', `
-      <div style="margin-top: 15px; padding: 12px; background: rgba(249,215,121,0.1); border-radius: 8px; font-size: 0.85rem; color: #666;">
-        <strong>Note:</strong> For more detailed analysis including live page content review, 
-        ensure your website allows cross-origin requests or check that our API services are accessible.
-      </div>
-    `);
-  }
+  // Previously inserted a note about CORS/API services here. Removed per spec to keep results page clean.
 }
 
 // LEAD CAPTURE
@@ -1248,8 +1300,23 @@ document.getElementById('lead-form').addEventListener('submit', async (e)=>{
       }
     });
   
-  // Update UI immediately
-  document.getElementById('lead-capture').innerHTML = '<h3>✅ Thank you!</h3><p>We\'ve received your info and will be in touch. In the meantime, download your report above.</p>';
+  // Update UI immediately with an inline download button
+  const leadCaptureContainer = document.getElementById('lead-capture');
+  if (leadCaptureContainer) {
+    leadCaptureContainer.innerHTML =
+      '<h3>✅ Thank you!</h3>' +
+      '<p>We\'ve received your info and will be in touch. In the meantime, download your report and get familiar with the information.</p>' +
+      '<div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:15px;">' +
+        '<button id="download-inline" class="btn-secondary">📄 Download Report</button>' +
+        '<button id="analyze-again" class="btn-secondary">🔄 Analyze Another Site</button>' +
+      '</div>';
+    // Attach click handler to trigger the same PDF download as the header button
+    const dlBtn = document.getElementById('download-inline');
+    if (dlBtn) dlBtn.addEventListener('click', downloadPDF);
+    // Attach click handler for analyze another site button to reload page
+    const againBtn = document.getElementById('analyze-again');
+    if (againBtn) againBtn.addEventListener('click', () => { location.reload(); });
+  }
 });
 
 // CTA HANDLERS
@@ -1260,3 +1327,19 @@ document.getElementById('cta-button').addEventListener('click', ()=>{
 });
 
 document.getElementById('download-pdf').addEventListener('click', downloadPDF);
+
+// Add a "Start Over" button to results
+document.addEventListener('DOMContentLoaded', function() {
+  // Add start over functionality
+  const resultsHeader = document.querySelector('.results-header');
+  if (resultsHeader) {
+    const startOverBtn = document.createElement('button');
+    startOverBtn.textContent = '🔄 Analyze Another Site';
+    startOverBtn.className = 'btn-secondary';
+    startOverBtn.style.marginLeft = '10px';
+    startOverBtn.addEventListener('click', () => {
+      location.reload();
+    });
+    resultsHeader.appendChild(startOverBtn);
+  }
+});

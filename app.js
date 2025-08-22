@@ -1,3 +1,32 @@
+// SUPABASE CONFIGURATION
+// Replace these with your actual Supabase credentials
+const SUPABASE_URL = 'https://hcgrmpgnxnajhachbqcr.supabase.co'; // Replace with your Project URL
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhjZ3JtcGdueG5hamhhY2hicWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4ODgzNzIsImV4cCI6MjA3MTQ2NDM3Mn0.Zn-3tdIqYKNo1B2tDcRQscxj_2SiG4CEiB6wvLGH3-g'; // Replace with your anon/public key
+
+// Initialize Supabase client
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Test Function 
+async function testSupabaseConnection() {
+  console.log('Testing Supabase connection...');
+  console.log('Supabase URL:', SUPABASE_URL);
+  console.log('API Key (last 10 chars):', SUPABASE_ANON_KEY.slice(-10));
+  
+  // Test a simple select to see if we can connect
+  const { data, error } = await supabase
+    .from('url_submissions')
+    .select('count', { count: 'exact', head: true });
+    
+  if (error) {
+    console.error('Connection test failed:', error);
+  } else {
+    console.log('Connection test successful, table exists');
+  }
+}
+
+// Call the test when page loads
+testSupabaseConnection();
+
 // Global state
 function setDisplayById(id, value){
   var el = document.getElementById(id);
@@ -7,6 +36,7 @@ function setDisplayById(id, value){
 let currentAnalysis = null;
 let currentUrl = '';
 let realAnalysisData = null;
+let currentEmail = ''; // Store email for lead capture
 
 // AEO factors (weights & checks)
 const aeoFactors = {
@@ -26,6 +56,85 @@ const healthcareKeywords = {
   safety: ['side effects', 'contraindications', 'warnings', 'precautions', 'adverse', 'safety'],
   medical: ['doctor', 'physician', 'medical', 'healthcare', 'clinical', 'hospital', 'medicine']
 };
+
+// SUPABASE DATABASE FUNCTIONS
+
+async function saveUrlSubmission(url, email, score = null, realDataUsed = false) {
+  try {
+    console.log('Saving URL submission to database...');
+    
+    const { data, error } = await supabase
+      .from('url_submissions')
+      .insert([
+        {
+          url: url,
+          email: email,
+          overall_score: score,
+          real_data_used: realDataUsed,
+          user_ip: await getUserIP(),
+          user_agent: navigator.userAgent
+        }
+      ])
+      .select();
+
+    if (error) {
+      console.error('Error saving URL submission:', error);
+      return false;
+    }
+
+    console.log('URL submission saved successfully:', data);
+    return true;
+  } catch (err) {
+    console.error('Unexpected error saving URL submission:', err);
+    return false;
+  }
+}
+
+async function saveLeadCapture(leadData) {
+  try {
+    console.log('Saving lead capture to database...');
+    
+    const { data, error } = await supabase
+      .from('lead_captures')
+      .insert([
+        {
+          name: leadData.name,
+          email: leadData.email,
+          company: leadData.company,
+          company_size: leadData.companySize,
+          challenge: leadData.challenge,
+          analyzed_url: leadData.analyzedUrl,
+          overall_score: leadData.overallScore,
+          user_ip: await getUserIP(),
+          user_agent: navigator.userAgent
+        }
+      ])
+      .select();
+
+    if (error) {
+      console.error('Error saving lead capture:', error);
+      return false;
+    }
+
+    console.log('Lead capture saved successfully:', data);
+    return true;
+  } catch (err) {
+    console.error('Unexpected error saving lead capture:', err);
+    return false;
+  }
+}
+
+// Helper function to get user IP (optional)
+async function getUserIP() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    return data.ip;
+  } catch (err) {
+    console.log('Could not get user IP:', err);
+    return null;
+  }
+}
 
 // REAL ANALYSIS FUNCTIONS
 
@@ -875,6 +984,7 @@ document.getElementById('grader-form').addEventListener('submit', async (e)=>{
   try{
     const normalized = normalizeUrl(urlVal);
     currentUrl = normalized;
+    currentEmail = emailVal; // Store for lead capture
     
     // Hide form and show loading
     setDisplayById('form-section','none');
@@ -934,6 +1044,16 @@ document.getElementById('grader-form').addEventListener('submit', async (e)=>{
     // Generate enhanced scores
     const scores = generateEnhancedScores(normalized, realAnalysisData);
     currentAnalysis = scores; 
+    
+    // Save URL submission to database (don't wait for this)
+    saveUrlSubmission(normalized, emailVal, scores.overall, realAnalysisData !== null)
+      .then(success => {
+        if (success) {
+          console.log('✅ URL submission saved to database');
+        } else {
+          console.warn('⚠️ Failed to save URL submission to database');
+        }
+      });
     
     // Display results
     displayResults(scores);
@@ -1103,21 +1223,32 @@ function displayAnalysisDetails(realData) {
 
 // LEAD CAPTURE
 
-document.getElementById('lead-form').addEventListener('submit', (e)=>{
+document.getElementById('lead-form').addEventListener('submit', async (e)=>{
   e.preventDefault();
-  const data = { 
+  
+  const leadData = { 
     name: document.getElementById('lead-name').value, 
     email: document.getElementById('lead-email').value, 
     company: document.getElementById('lead-company').value, 
-    size: document.getElementById('company-size').value, 
+    companySize: document.getElementById('company-size').value, 
     challenge: document.getElementById('challenge').value, 
-    url: currentUrl, 
-    score: currentAnalysis?.overall ?? null, 
-    realDataUsed: realAnalysisData !== null,
-    ts: new Date().toISOString() 
+    analyzedUrl: currentUrl, 
+    overallScore: currentAnalysis?.overall ?? null
   };
   
-  console.log('Lead capture:', data);
+  console.log('Lead capture data:', leadData);
+  
+  // Save to database (don't wait for this)
+  saveLeadCapture(leadData)
+    .then(success => {
+      if (success) {
+        console.log('✅ Lead capture saved to database');
+      } else {
+        console.warn('⚠️ Failed to save lead capture to database');
+      }
+    });
+  
+  // Update UI immediately
   document.getElementById('lead-capture').innerHTML = '<h3>✅ Thank you!</h3><p>We\'ve received your info and will be in touch. In the meantime, download your report above.</p>';
 });
 

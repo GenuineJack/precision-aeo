@@ -273,4 +273,53 @@ body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helveti
     .btn{border:1px solid var(--c-line);background:var(--c-white);padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer}
     .btn.brand{border:none;background:linear-gradient(135deg,var(--c-brand),var(--c-accent));color:#fff}
   
+/* Analysis Details Section */
+.analysis-details {
+  background: rgba(35,206,217,0.03);
+  border: 1px solid rgba(35,206,217,0.15);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 25px 0;
+  text-align: center;
+}
 
+.analysis-details h4 {
+  color: #097C87;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.check-item {
+  background: rgba(161,204,166,0.1);
+  border: 1px solid rgba(161,204,166,0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.check-item.good {
+  background: rgba(161,204,166,0.15);
+  border-color: rgba(161,204,166,0.4);
+}
+
+@media (max-width: 768px) {
+  .analysis-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .check-item {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+}

@@ -35,6 +35,10 @@
       --color-text-light: #555555;
       --color-white: #ffffff;
       --color-accent: #7fb069;
+      --gradient-primary: linear-gradient(135deg, #7fb069 0%, #5a9c4e 100%);
+      --gradient-bg: linear-gradient(135deg, #f5fdc6 0%, #e3e8c1 100%);
+      --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.12);
     }
     
     /* Reset */
@@ -50,7 +54,8 @@
       font-size: 16px;
       line-height: 1.6;
       color: var(--color-text);
-      background-color: var(--color-white);
+      background: var(--gradient-bg);
+      min-height: 100vh;
     }
     
     /* Container */
@@ -68,7 +73,7 @@
       right: 0;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--color-very-light-gray);
+      border-bottom: 1px solid rgba(127, 176, 105, 0.1);
       padding: 1rem 0;
       z-index: 1000;
     }
@@ -108,17 +113,30 @@
       color: var(--color-accent);
     }
     
+    /* Main Content */
+    #main-content {
+      margin-top: 4rem;
+    }
+    
     /* Hero Section */
     .hero {
-      background-color: var(--color-pale-green);
-      padding: 8rem 0 4rem;
-      margin-top: 4rem;
+      padding: 6rem 0 4rem;
+    }
+    
+    .hero-card {
+      background: var(--color-white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong);
+      overflow: hidden;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     
     .hero .container {
       display: flex;
       align-items: center;
-      gap: 3rem;
+      gap: 4rem;
+      padding: 3rem;
     }
     
     .hero-content {
@@ -127,7 +145,7 @@
     }
     
     .hero-content h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       font-weight: 800;
       color: var(--color-text);
       margin-bottom: 1rem;
@@ -137,31 +155,55 @@
     .hero-content .subheadline {
       font-size: 1.25rem;
       font-weight: 500;
-      color: var(--color-text);
-      margin-bottom: 2rem;
+      color: var(--color-text-light);
+      margin-bottom: 2.5rem;
       line-height: 1.5;
+    }
+    
+    /* Form Container */
+    .form-container {
+      background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(127, 176, 105, 0.2);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .form-container h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    
+    .form-subtitle {
+      color: var(--color-text-light);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
     }
     
     .hero-form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      max-width: 500px;
+      gap: 1.5rem;
     }
     
     .form-inputs {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 1rem;
     }
     
     .hero-form input {
-      padding: 0.875rem 1rem;
+      padding: 1rem;
       font-size: 1rem;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
+      border: 2px solid var(--color-very-light-gray);
+      border-radius: 12px;
       font-family: inherit;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background: var(--color-white);
     }
     
     .hero-form input:focus {
@@ -171,20 +213,21 @@
     }
     
     .hero-form button {
-      padding: 1rem 2rem;
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      border: none;
+      padding: 1.25rem 2rem;
       font-size: 1.125rem;
       font-weight: 700;
-      color: var(--color-white);
-      background-color: var(--color-text);
-      border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
     }
     
     .hero-form button:hover:not(:disabled) {
-      background-color: #111111;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
     }
     
     .hero-form button:disabled {
@@ -193,11 +236,14 @@
     }
     
     .form-note {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: var(--color-text-light);
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-align: center;
+      margin-top: 1rem;
+      line-height: 1.4;
     }
     
     .hero-illustration {
@@ -205,15 +251,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+    }
+    
+    .hero-illustration img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
     }
     
     .illustration-placeholder {
       width: 100%;
       max-width: 400px;
       height: 300px;
-      background: var(--color-light-green);
-      border: 3px dashed var(--color-light-gray);
-      border-radius: 12px;
+      background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
+      border: 3px dashed rgba(127, 176, 105, 0.3);
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -222,14 +276,35 @@
       font-weight: 600;
     }
     
+    .hero-illustration::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background: var(--gradient-primary);
+      border-radius: 24px;
+      opacity: 0.1;
+      z-index: -1;
+    }
+    
     /* Benefits Section */
     .benefits {
-      background-color: var(--color-very-light-gray);
-      padding: 4rem 0;
+      padding: 5rem 0;
+    }
+    
+    .benefits-card {
+      background: var(--color-white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong);
+      padding: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     
     .benefits h2 {
-      font-size: 2rem;
+      font-size: 2.25rem;
       font-weight: 800;
       text-align: center;
       margin-bottom: 3rem;
@@ -238,55 +313,68 @@
     
     .benefit-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
     }
     
     .benefit-item {
-      background: var(--color-white);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: linear-gradient(135deg, #fafffe 0%, #f5faf8 100%);
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(127, 176, 105, 0.1);
+      text-align: center;
     }
     
     .benefit-item:hover {
       transform: translateY(-4px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-strong);
+    }
+    
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.75rem;
+      box-shadow: var(--shadow-soft);
     }
     
     .benefit-item h3 {
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--color-text);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .benefit-item .icon {
-      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
     
     .benefit-item p {
       color: var(--color-text-light);
       line-height: 1.6;
+      font-size: 1rem;
     }
     
     /* Trust Section */
     .trust {
-      background-color: var(--color-white);
       padding: 4rem 0;
     }
     
-    .trust .container {
+    .trust-card {
+      background: var(--color-white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong);
+      padding: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
       text-align: center;
-      max-width: 800px;
     }
     
     .trust h2 {
-      font-size: 1.75rem;
+      font-size: 2rem;
       font-weight: 800;
       color: var(--color-text);
       margin-bottom: 1.5rem;
@@ -296,16 +384,20 @@
       color: var(--color-text);
       margin-bottom: 2rem;
       line-height: 1.6;
+      font-size: 1.1rem;
     }
     
     .trust blockquote {
-      background: var(--color-pale-green);
-      padding: 2rem;
-      border-radius: 12px;
+      background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
+      padding: 2.5rem;
+      border-radius: 16px;
       font-style: italic;
       color: var(--color-text);
       margin: 2rem 0;
       position: relative;
+      border: 1px solid rgba(127, 176, 105, 0.2);
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
     
     .trust blockquote::before {
@@ -320,16 +412,277 @@
     
     .trust blockquote cite {
       display: block;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       font-style: normal;
       font-weight: 600;
       color: var(--color-text);
     }
     
+    /* Feature Sections */
+    .feature {
+      padding: 3rem 0;
+    }
+    
+    .feature-card {
+      background: var(--color-white);
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      padding: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+      border: 1px solid rgba(127, 176, 105, 0.1);
+    }
+    
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--gradient-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .feature-content {
+      flex: 1;
+      min-width: 280px;
+    }
+    
+    .feature-content h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    
+    .feature-content p {
+      margin: 0 0 1rem 0;
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+    
+    .feature .btn {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      text-decoration: none;
+      padding: 0.875rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    
+    .feature .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    /* AEO Get Smart Section */
+    #aeo-get-smart {
+      padding: 4rem 0;
+    }
+    
+    .smart-card {
+      background: var(--color-white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong);
+      padding: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .smart-card h2 {
+      text-align: center;
+      margin: 0 0 2.5rem 0;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--color-text);
+    }
+    
+    .smart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .smart-item {
+      background: linear-gradient(135deg, #fafffe 0%, #f5faf8 100%);
+      border: 1px solid rgba(127, 176, 105, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+    
+    .smart-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-strong);
+    }
+    
+    .smart-item h3 {
+      margin: 0.25rem 0 0.75rem 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    
+    .smart-item p {
+      color: var(--color-text-light);
+      margin: 0 0 1.5rem 0;
+      line-height: 1.5;
+    }
+    
+    .smart-item .btn {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    
+    .smart-item .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    /* FAQ Section */
+    .faq {
+      padding: 4rem 0;
+    }
+    
+    .faq-card {
+      background: var(--color-white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong);
+      padding: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .faq h2 {
+      text-align: center;
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 2.5rem;
+      color: var(--color-text);
+    }
+    
+    .faq-item {
+      background: linear-gradient(135deg, #fafffe 0%, #f5faf8 100%);
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(127, 176, 105, 0.1);
+    }
+    
+    .faq-toggle {
+      width: 100%;
+      padding: 1.5rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+    
+    .faq-toggle:hover {
+      background: rgba(127, 176, 105, 0.1);
+    }
+    
+    .faq-toggle .toggle-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+      color: var(--color-accent);
+    }
+    
+    .faq-toggle[aria-expanded="true"] .toggle-icon {
+      transform: rotate(45deg);
+    }
+    
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 1.5rem;
+    }
+    
+    .faq-item.active .faq-content {
+      max-height: 500px;
+      padding: 1rem 1.5rem 1.5rem;
+    }
+    
+    .faq-content p {
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+    
+    /* CTA Section */
+    .cta {
+      padding: 4rem 0;
+    }
+    
+    .cta-card {
+      background: var(--color-white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong);
+      padding: 3rem;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-size: 2.5rem;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+    
+    .cta p {
+      font-size: 1.25rem;
+      color: var(--color-text-light);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    
+    .cta-button {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      border: none;
+      padding: 1.25rem 3rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
+    
     /* Footer */
     footer {
-      background-color: var(--color-light-gray);
-      padding: 2rem 0;
+      background: var(--color-white);
+      border-top: 1px solid rgba(127, 176, 105, 0.1);
+      padding: 2.5rem 0;
+      margin-top: 2rem;
     }
     
     .footer-content {
@@ -351,155 +704,45 @@
     }
     
     footer a:hover {
-      color: var(--color-text);
-      text-decoration: underline;
+      color: var(--color-accent);
     }
     
     .footer-links a {
       margin: 0 0.75rem;
     }
     
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      /* Header */
-      header .container {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      .branding {
-        font-size: 1.25rem;
-      }
-      
-      /* Hero */
-      .hero {
-        padding: 6rem 0 3rem;
-      }
-      
-      .hero .container {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .hero-content {
-        max-width: 100%;
-      }
-      
-      .hero-content h1 {
-        font-size: 1.875rem;
-      }
-      
-      .hero-content .subheadline {
-        font-size: 1.125rem;
-      }
-      
-      .hero-form {
-        max-width: 100%;
-      }
-      
-      .hero-form input,
-      .hero-form button {
-        width: 100%;
-      }
-      
-      .illustration-placeholder {
-        height: 200px;
-        font-size: 1rem;
-      }
-      
-      /* Benefits */
-      .benefit-list {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      
-      .benefit-item {
-        text-align: center;
-      }
-      
-      .benefit-item h3 {
-        justify-content: center;
-      }
-      
-      /* Results */
-      .results-header {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      
-      .categories {
-        grid-template-columns: 1fr;
-      }
-      
-      .lead-form {
-        grid-template-columns: 1fr;
-      }
-      
-      /* Footer */
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .footer-links {
-        margin-top: 0.5rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .hero-content h1 {
-        font-size: 1.5rem;
-      }
-      
-      .benefits h2,
-      .trust h2 {
-        font-size: 1.5rem;
-      }
-    }
-    
-    /* Accessibility */
-    :focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-    
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .hero-content {
-      animation: fadeIn 0.8s ease-out;
-    }
-    
     /* Loading State */
     .loading {
-      text-align: center;
-      padding: 60px 20px;
-      min-height: 400px;
-      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2000;
+      background: var(--color-white);
+      display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      text-align: center;
+      overflow-y: auto;
     }
     
     .spinner {
       border: 4px solid #f3f3f3;
       border-top: 4px solid var(--color-accent);
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       animation: spin 1s linear infinite;
       margin: 0 auto 20px;
     }
     
-    /* Results Section */
+    body.is-analyzing {
+      overflow: hidden;
+    }
+    
+    /* Results Section - Enhanced */
     .results {
       padding: 60px 20px;
       background: var(--color-white);
@@ -536,7 +779,174 @@
       color: white;
     }
     
-    /* Score Display */
+    /* Hide homepage sections when results are shown */
+    body.results .hero,
+    body.results #features-section,
+    body.results .benefits,
+    body.results .trust,
+    body.results .faq,
+    body.results .cta,
+    body.results #precision-aeo-gpt,
+    body.results #aeo-get-smart {
+      display: none;
+    }
+    
+    /* Hide Contact link on home and results pages */
+    body.home header nav a[href="#contact"],
+    body.results header nav a[href="#contact"] {
+      display: none;
+    }
+    
+    /* Hide "How It Works" link on results page */
+    body.results header nav a.how-link {
+      display: none;
+    }
+    
+    /* Emphasize "How It Works" link in nav */
+    header nav a.how-link {
+      font-weight: 700;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      /* Header */
+      header .container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .branding {
+        font-size: 1.25rem;
+      }
+      
+      /* Hero */
+      .hero {
+        padding: 4rem 0 3rem;
+      }
+      
+      .hero .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+      
+      .hero-content {
+        max-width: 100%;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.25rem;
+      }
+      
+      .hero-content .subheadline {
+        font-size: 1.125rem;
+      }
+      
+      .hero-form input,
+      .hero-form button {
+        width: 100%;
+      }
+      
+      .illustration-placeholder {
+        height: 200px;
+        font-size: 1rem;
+      }
+      
+      /* Benefits */
+      .benefit-list {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .smart-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .feature-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      /* Cards */
+      .benefits-card,
+      .trust-card,
+      .faq-card,
+      .cta-card,
+      .smart-card {
+        padding: 2rem;
+      }
+      
+      .benefits h2,
+      .trust h2,
+      .faq h2 {
+        font-size: 1.875rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .cta h2 {
+        font-size: 2rem;
+      }
+      
+      /* Footer */
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 1.75rem;
+      }
+      
+      .benefits h2,
+      .trust h2,
+      .faq h2 {
+        font-size: 1.5rem;
+      }
+      
+      .cta h2 {
+        font-size: 1.75rem;
+      }
+    }
+    
+    /* Accessibility */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .hero-content {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .benefit-item {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .benefit-item:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    .benefit-item:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    
+    /* Score Display and other results styling remains the same */
     .score-display {
       text-align: center;
       margin-bottom: 40px;
@@ -744,179 +1154,6 @@
       border: 0;
     }
     
-    /* FAQ Section */
-    .faq {
-      padding: 4rem 0;
-      background: var(--color-very-light-gray);
-    }
-    
-    .faq-item {
-      background: var(--color-white);
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-    
-    .faq-toggle {
-      width: 100%;
-      padding: 1.5rem;
-      background: var(--color-white);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--color-text);
-      text-align: left;
-      transition: background-color 0.3s ease;
-    }
-    
-    .faq-toggle:hover {
-      background: var(--color-pale-green);
-    }
-    
-    .faq-toggle .toggle-icon {
-      font-size: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .faq-toggle[aria-expanded="true"] .toggle-icon {
-      transform: rotate(45deg);
-    }
-    
-    .faq-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      padding: 0 1.5rem;
-    }
-    
-    .faq-item.active .faq-content {
-      max-height: 500px;
-      padding: 1rem 1.5rem 1.5rem;
-    }
-    
-    /* CTA Section */
-    .cta {
-      background: linear-gradient(135deg, var(--color-pale-green), var(--color-light-green));
-      padding: 4rem 0;
-      text-align: center;
-    }
-
-    /* ------------------------- */
-    /* Custom modifications     */
-    /* ------------------------- */
-    /* Full-screen loading overlay */
-    .loading {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2000;
-      background: var(--color-white);
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow-y: auto;
-    }
-
-    /* Prevent background scrolling during analysis */
-    body.is-analyzing {
-      overflow: hidden;
-    }
-
-    /* Hide the top Contact link on the homepage only */
-    body.home header nav a[href="#contact"] {
-      display: none;
-    }
-    
-    .cta h2 {
-      font-size: 2.2rem;
-      color: var(--color-text);
-      margin-bottom: 1rem;
-      font-weight: 800;
-    }
-    
-    .cta p {
-      font-size: 1.1rem;
-      color: var(--color-text);
-      margin-bottom: 2rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .cta-button {
-      background: var(--color-text);
-      color: var(--color-white);
-      border: none;
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Emphasize "How It Works" link in nav */
-    header nav a.how-link {
-      font-weight: 700;
-    }
-
-    /* Hide Contact link on home and results pages */
-    body.home header nav a[href="#contact"],
-    body.results header nav a[href="#contact"] {
-      display: none;
-    }
-
-    /* Hide "How It Works" link on results page */
-    body.results header nav a.how-link {
-      display: none;
-    }
-
-    /* Hide homepage sections when results are shown */
-    body.results .hero,
-    body.results #features-section,
-    body.results .benefits,
-    body.results .trust,
-    body.results .faq {
-      display: none;
-    }
-    body.results .cta {
-      display: none;
-    }
-
-    /* Shorten the trust section */
-    .trust {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-    .trust h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .trust p, .trust blockquote {
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 1rem;
-    }
-    /* Add extra spacing between the trust paragraph and the quote */
-    .trust p {
-      margin-bottom: 1.5rem;
-    }
-
     /* Info icon for category tooltips */
     .info-icon {
       display: inline-block;
@@ -926,6 +1163,7 @@
       color: var(--color-accent);
       position: relative;
     }
+    
     .info-icon:hover::after,
     .info-icon:focus::after {
       content: attr(data-description);
@@ -944,78 +1182,17 @@
       z-index: 1000;
       white-space: normal;
     }
+    
     .info-icon:focus {
       outline: none;
     }
-
-    /* Lead capture form styling to mirror homepage aesthetics */
-    .lead-capture {
-      background: rgba(127, 176, 105, 0.05);
-      border-left: 4px solid var(--color-accent);
-      padding: 2rem;
-      border-radius: 12px;
-      margin-top: 2rem;
-    }
-    .lead-capture h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--color-text);
-    }
-    .lead-capture p {
-      margin-bottom: 1.5rem;
+    
+    /* URL Preview */
+    .url-preview {
+      font-size: 0.9rem;
       color: var(--color-text-light);
-    }
-    .lead-form {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-    .lead-form .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-    .lead-form label {
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--color-text);
-    }
-    .lead-form input,
-    .lead-form select,
-    .lead-form textarea {
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: 2px solid var(--color-light-gray);
-      border-radius: 8px;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .lead-form input:focus,
-    .lead-form select:focus,
-    .lead-form textarea:focus {
-      outline: none;
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 3px rgba(127, 176, 105, 0.2);
-    }
-    .lead-form textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    .lead-form button {
-      grid-column: 1 / -1;
-      padding: 1rem 1.5rem;
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: var(--color-white);
-      background-color: var(--color-text);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .lead-form button:hover:not(:disabled) {
-      background-color: #111;
-      transform: translateY(-2px);
+      margin-top: 5px;
+      font-style: italic;
     }
   </style>
 </head>
@@ -1026,7 +1203,6 @@
 <header>
   <div class="container">
     <div class="branding">
-      <!-- Make the Precision AEO text a link back to the homepage -->
       <a href="index.html" style="text-decoration:none;color:inherit;">
         <img src="assets/brand/PAEO-long_logo.png" alt="Precision AEO" style="height:28px;vertical-align:middle;"/>
       </a>
@@ -1041,49 +1217,52 @@
 
 <!-- Hero Section Start -->
 <section class="hero" id="form-section">
-  <div class="container">
-    <div class="hero-content">
-      <h1>Is Your Website <br>Answer-Ready?</br></h1>
-      <p class="subheadline">
-        Get a free, custom report of your site's Answer Engine Optimization (AEO). 
-        Uncover what's working, what's not, and how to rank in an answer-driven world.
-      </p>
+  <div class="hero-card">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Is Your Healthcare Website Answer-Ready?</h1>
+        <p class="subheadline">
+          Get a free, custom AEO report tailored for healthcare and life science companies. 
+          Uncover what's working, what's not, and how to rank in an answer-driven world where patients and HCPs search for medical information.
+        </p>
+        
+        <div class="form-container">
+          <h3>Get Your Free Analysis</h3>
+          <p class="form-subtitle">Join 500+ healthcare and life science companies who've optimized their content for AI search</p>
+          
+          <form id="grader-form" class="hero-form" novalidate>
+            <div class="form-inputs">
+              <input 
+                type="url" 
+                id="website-url"
+                name="website" 
+                placeholder="Enter your website URL" 
+                required
+                autocomplete="url"
+              />
+              <div id="url-preview" class="url-preview" aria-live="polite" style="display:none;"></div>
+              <input 
+                type="email" 
+                id="email"
+                name="email" 
+                placeholder="Enter your email address" 
+                required
+                autocomplete="email"
+              />
+            </div>
+            <button type="submit">Get My Free Analysis</button>
+            <div class="form-note">
+              🚫 No spam — you'll have your report within minutes!
+            </div>
+          </form>
+        </div>
+      </div>
       
-      <!-- Form with proper IDs for app.js integration -->
-      <form id="grader-form" class="hero-form" novalidate>
-        <div class="form-inputs">
-          <input 
-            type="url" 
-            id="website-url"
-            name="website" 
-            placeholder="Enter your website URL" 
-            required
-            autocomplete="url"
-          />
-          <div id="url-preview" class="url-preview" aria-live="polite" style="display:none;"></div>
-          <input 
-            type="email" 
-            id="email"
-            name="email" 
-            placeholder="Enter your email address" 
-            required
-            autocomplete="email"
-          />
+      <div class="hero-illustration">
+        <img id="hero-image" alt="AEO analysis report preview" style="display:none; width:100%; height:auto;" />
+        <div class="illustration-placeholder">
+          [ Report Preview ]
         </div>
-        <button type="submit">Get My Free Analysis</button>
-        <div class="form-note">
-          <!-- Char-check: replaced corrupted emoji with proper stop sign and fixed em dash -->
-          🚫 No spam — you'll have your report within minutes!
-        </div>
-      </form>
-    </div>
-    
-    <div class="hero-illustration">
-      <!-- The hero preview image will be shown if a file exists in assets/homepage_hero/. -->
-      <!-- Slightly enlarge hero image; adjust max-width here if needed -->
-      <img id="hero-image" alt="AEO analysis report preview" style="display:none; width:120%; height:auto;" />
-      <div class="illustration-placeholder">
-        [ Report Preview ]
       </div>
     </div>
   </div>
@@ -1093,10 +1272,10 @@
 <!-- Loading State -->
 <div class="loading" id="loading" style="display: none;" role="status" aria-live="polite" aria-busy="true">
   <div class="spinner" aria-hidden="true"></div>
-  <h3>Analyzing your website...</h3>
-  <p>Running comprehensive analysis including page speed, content structure, and healthcare compliance checks.</p>
+  <h3>Analyzing your healthcare website...</h3>
+  <p>Running comprehensive analysis including page speed, content structure, YMYL compliance, and medical content optimization.</p>
   <div class="analysis-progress" style="margin-top: 20px; font-size: 0.9rem; color: #5a6c7d;">
-    <div id="progress-text">⏳ Initializing analysis...</div>
+    <div id="progress-text">⏳ Initializing healthcare content analysis...</div>
   </div>
 </div>
 
@@ -1132,7 +1311,7 @@
 
   <div class="lead-capture" id="lead-capture">
     <h3>🚀 Need Help Improving Your AEO Score?</h3>
-    <p>Your analysis reveals opportunities for improvement. We specialize in healthcare content optimization.</p>
+    <p>Your analysis reveals opportunities for improvement. We specialize in healthcare content optimization and YMYL compliance for pharma, biotech, and medical device companies.</p>
     
     <form class="lead-form" id="lead-form" novalidate>
       <div class="form-group">
@@ -1159,7 +1338,7 @@
       </div>
       <div class="form-group" style="grid-column: 1/-1;">
         <label for="challenge">What's your biggest content challenge? (optional)</label>
-        <textarea id="challenge" placeholder="e.g., Our clinical content isn't ranking well in AI search results..."></textarea>
+        <textarea id="challenge" placeholder="e.g., Our clinical content isn't ranking well in AI search results, we need better YMYL compliance..."></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn-primary">Get Expert Help</button>
@@ -1170,40 +1349,37 @@
 
 <!-- Benefits/How-It-Works Section Start -->
 <section id="features-section" class="benefits">
-  <div class="container">
-    <h2>How Precision AEO Helps You</h2>
-    
-    <div class="benefit-list">
-      <div class="benefit-item">
-        <h3>
-        <span class="icon">🏆</span>
-          Site Visibility Score
-        </h3>
-        <p>
-          Find out how visible your site is to answer engines like AI chatbots 
-          and Google's featured snippets.
-        </p>
-      </div>
+  <div class="benefits-card">
+    <div class="container">
+      <h2>How Precision AEO Helps Healthcare Companies</h2>
       
-      <div class="benefit-item">
-        <h3>
-        <span class="icon">🚀</span>
-          Personalized Recommendations
-        </h3>
-        <p>
-          Receive step-by-step guidance to improve your content, 
-          tech SEO, and more.
-        </p>
-      </div>
-      
-      <div class="benefit-item">
-        <h3>
-        <span class="icon">📄</span>
-          Free PDF Report
-        </h3>
-        <p>
-          Keep the 20‑page report for reference — it's packed with insights, completely free.
-        </p>
+      <div class="benefit-list">
+        <div class="benefit-item">
+          <div class="benefit-icon">🏥</div>
+          <h3>Healthcare Content Visibility</h3>
+          <p>
+            Discover how visible your medical content is to AI assistants that patients and HCPs 
+            use for health information, and Google's medical featured snippets.
+          </p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">⚕️</div>
+          <h3>YMYL-Compliant Recommendations</h3>
+          <p>
+            Get healthcare-specific guidance to improve your content authority, 
+            medical disclaimers, author credentials, and regulatory compliance.
+          </p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">📋</div>
+          <h3>Comprehensive Healthcare Audit</h3>
+          <p>
+            Receive a detailed report covering clinical content structure, medical accuracy signals, 
+            and patient safety considerations — all for free.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -1212,95 +1388,99 @@
 
 <!-- Trust/Credibility Section Start -->
 <section class="trust">
-  <div class="container">
-    <h2>Who's Behind Precision AEO?</h2>
-    <p>
-      Precision AEO was developed by the digital experts at <a href="https://www.precisionaq.com/">Precision AQ</a>, leveraging best practices in search and AI. It's the same tool we recommend to our clients who are getting started in AEO strategy.
-    </p>
-    <blockquote>
-      When we first began our Answer Engine Optimization (AEO) journey, we developed this handy tool to share our expertise with our clients. We're excited to offer it to everyone now!
-      <cite> — Jack D. | AVP Digital Strategy | Precision AQ</cite>
-    </blockquote>
+  <div class="trust-card">
+    <div class="container">
+      <h2>Healthcare AEO Expertise You Can Trust</h2>
+      <p>
+        Precision AEO was developed by the digital experts at <a href="https://www.precisionaq.com/" style="color: var(--color-accent); text-decoration: none;">Precision AQ</a>, leveraging best practices in healthcare content strategy and AI optimization. We understand the unique challenges of YMYL compliance, medical content authority, and patient safety considerations.
+      </p>
+      <blockquote>
+        When we started helping our pharma and biotech clients with Answer Engine Optimization, we developed this tool to assess their unique YMYL requirements and medical content challenges. We're excited to offer it to the broader healthcare community!
+        <cite> — Jack D. | AVP Digital Strategy | Precision AQ</cite>
+      </blockquote>
+    </div>
   </div>
 </section>
 <!-- Trust Section End -->
 
 <!-- Precision AEO GPT Feature Start -->
-<section class="feature" id="precision-aeo-gpt" style="padding:3rem 0;background:#fff;border-top:1px solid #edeff2;border-bottom:1px solid #edeff2;">
-  <div class="container" style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap;">
-    <div aria-hidden="true" style="width:56px;height:56px;border-radius:50%;background:#f5fdc6;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🤖</div>
-    <div style="flex:1;min-width:260px;">
-      <h2 style="margin:0 0 .5rem 0;">Precision AEO GPT</h2>
-      <p style="margin:0 0 1rem 0;color:#555">Assess pages, tighten copy to AEO patterns, and get next-step guidance — faster.</p>
-    </div>
-    <div>
-      <a class="btn" href="https://chatgpt.com/g/g-68b05a0703588191bfe7b55b1484c8a2-precisionaeo-gpt" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#333;color:#fff;padding:.9rem 1.2rem;border-radius:8px;text-decoration:none;font-weight:700;">Try AEO GPT</a>
+<section class="feature" id="precision-aeo-gpt">
+  <div class="container">
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-content">
+        <h2>Precision AEO GPT</h2>
+        <p>Your interactive AEO coach, powered by our complete methodology. Get instant page assessments, copy optimization suggestions, and strategic guidance—all in a conversational interface. Built on our whitepaper, playbook, and checklist.</p>
+      </div>
+      <div>
+        <a class="btn" href="https://chatgpt.com/g/g-68b05a0703588191bfe7b55b1484c8a2-precisionaeo-gpt" target="_blank" rel="noopener noreferrer">Launch AEO GPT</a>
+      </div>
     </div>
   </div>
 </section>
 <!-- Precision AEO GPT Feature End -->
 
 <!-- AEO Get Smart Start -->
-<section id="aeo-get-smart" style="padding:3rem 0;background:#f9fafb;">
-  <div class="container">
-    <h2 style="text-align:center;margin:0 0 1.5rem 0;">AEO Get Smart</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;">
-      <article style="background:#fff;border:1px solid #edeff2;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <h3 style="margin:.25rem 0 .5rem 0;">Whitepaper — The Future of Search</h3>
-        <p style="color:#555;margin:0 0 1rem 0;">A practical primer on Answer Engine Optimization and how AI reshapes discovery.</p>
-        <a href="whitepaper.html" class="btn" style="text-decoration:none;background:#333;color:#fff;padding:.6rem 1rem;border-radius:8px;font-weight:700;display:inline-block;">View</a>
-      </article>
-      <article style="background:#fff;border:1px solid #edeff2;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <h3 style="margin:.25rem 0 .5rem 0;">Checklist — AEO Readiness</h3>
-        <p style="color:#555;margin:0 0 1rem 0;">A concise, step‑by‑step checklist to confirm your site is answer‑ready.</p>
-        <a href="checklist.html" class="btn" style="text-decoration:none;background:#333;color:#fff;padding:.6rem 1rem;border-radius:8px;font-weight:700;display:inline-block;">View</a>
-      </article>
-      <article style="background:#fff;border:1px solid #edeff2;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <h3 style="margin:.25rem 0 .5rem 0;">Playbook — AEO Content Playbook</h3>
-        <p style="color:#555;margin:0 0 1rem 0;">Templates and patterns to write content AI assistants love to cite.</p>
-        <a href="playbook.html" class="btn" style="text-decoration:none;background:#333;color:#fff;padding:.6rem 1rem;border-radius:8px;font-weight:700;display:inline-block;">View</a>
-      </article>
+<section id="aeo-get-smart">
+  <div class="smart-card">
+    <div class="container">
+      <h2>AEO Get Smart</h2>
+      <div class="smart-grid">
+        <article class="smart-item">
+          <h3>Whitepaper — The Future of Search</h3>
+          <p>A practical primer on Answer Engine Optimization and how AI reshapes discovery.</p>
+          <a href="whitepaper.html" class="btn">View</a>
+        </article>
+        <article class="smart-item">
+          <h3>Checklist — AEO Readiness</h3>
+          <p>A concise, step‑by‑step checklist to confirm your site is answer‑ready.</p>
+          <a href="checklist.html" class="btn">View</a>
+        </article>
+        <article class="smart-item">
+          <h3>Playbook — AEO Content Playbook</h3>
+          <p>Templates and patterns to write content AI assistants love to cite.</p>
+          <a href="playbook.html" class="btn">View</a>
+        </article>
+      </div>
     </div>
   </div>
 </section>
 <!-- AEO Get Smart End -->
 
-
-<!-- Info sections placeholder for app.js compatibility -->
-<div id="info-sections" style="display: none;"></div>
-
 <!-- FAQ Section Start -->
 <section class="faq" id="faq">
-  <div class="container">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; color: var(--color-text);">Frequently Asked Questions</h2>
-    
-    <div class="faq-item">
-      <button class="faq-toggle" aria-expanded="false">
-        <span>What is Answer Engine Optimization (AEO)?</span>
-        <span class="toggle-icon">+</span>
-      </button>
-      <div class="faq-content">
-        <p>Answer Engine Optimization (AEO) is the practice of optimizing your content to be easily understood and cited by AI‑powered search engines like Claude, Perplexity, and Google's AI features. Unlike traditional SEO, AEO focuses on structured data, clear answers, and authoritative signals that help AI systems extract and present your information accurately.</p>
+  <div class="faq-card">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <button class="faq-toggle" aria-expanded="false">
+          <span>What is Answer Engine Optimization (AEO)?</span>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <p>Answer Engine Optimization (AEO) is the practice of optimizing your content to be easily understood and cited by AI‑powered search engines like Claude, Perplexity, and Google's AI features. Unlike traditional SEO, AEO focuses on structured data, clear answers, and authoritative signals that help AI systems extract and present your information accurately.</p>
+        </div>
       </div>
-    </div>
-    
-    <div class="faq-item">
-      <button class="faq-toggle" aria-expanded="false">
-        <span>How does Precision AEO analyze my website?</span>
-        <span class="toggle-icon">+</span>
-      </button>
-      <div class="faq-content">
-        <p>Our tool performs comprehensive analysis including page speed testing via Google PageSpeed Insights API, content structure analysis, healthcare compliance checking, and technical SEO auditing. We evaluate six core factors: Content Structure (25%), Authority Signals (20%), Technical Optimization (20%), Content Clarity (15%), YMYL Compliance (10%), and User Experience (10%).</p>
+      
+      <div class="faq-item">
+        <button class="faq-toggle" aria-expanded="false">
+          <span>How does Precision AEO analyze my website?</span>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <p>Our tool performs comprehensive analysis including page speed testing via Google PageSpeed Insights API, content structure analysis, healthcare compliance checking, and technical SEO auditing. We evaluate six core factors: Content Structure (25%), Authority Signals (20%), Technical Optimization (20%), Content Clarity (15%), YMYL Compliance (10%), and User Experience (10%).</p>
+        </div>
       </div>
-    </div>
-    
-    <div class="faq-item">
-      <button class="faq-toggle" aria-expanded="false">
-        <span>Why is AEO important for healthcare companies?</span>
-        <span class="toggle-icon">+</span>
-      </button>
-      <div class="faq-content">
-        <p>Healthcare content is classified as YMYL (Your Money or Your Life), requiring higher standards of authority and accuracy. With clinicians and patients increasingly using AI assistants for medical information, proper AEO ensures your content is accurately cited with appropriate medical disclaimers, author credentials, and safety information.</p>
+      
+      <div class="faq-item">
+        <button class="faq-toggle" aria-expanded="false">
+          <span>Why is AEO critical for healthcare and life science companies?</span>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <p>Healthcare content is classified as YMYL (Your Money or Your Life), requiring the highest standards of authority, accuracy, and trust signals. With clinicians and patients increasingly using AI assistants for medical information, proper AEO ensures your content is accurately cited with appropriate medical disclaimers, author credentials, regulatory compliance, and safety information. Poor AEO can lead to misinformation or missed opportunities to educate your audiences.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1309,10 +1489,12 @@
 
 <!-- CTA Section Start -->
 <section class="cta" id="cta-section">
-  <div class="container">
-    <h2>Ready to Optimize Your Healthcare Content?</h2>
-    <p>Join healthcare companies improving <br>their AI search visibility with Precision AEO</br></p>
-    <button class="cta-button" id="cta-button">Run My AEO Audit</button>
+  <div class="cta-card">
+    <div class="container">
+      <h2>Ready to Optimize Your Healthcare Content for AI Search?</h2>
+      <p>Join leading pharma, biotech, and medical device companies improving their AI search visibility with Precision AEO</p>
+      <button class="cta-button" id="cta-button">Run My Healthcare AEO Audit</button>
+    </div>
   </div>
 </section>
 <!-- CTA Section End -->
@@ -1360,6 +1542,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Include the main app.js file for analysis functionality -->
 <script src="app.js"></script>
+
 <!-- Hero image loader script -->
 <script>
 // Attempt to load hero preview image if present

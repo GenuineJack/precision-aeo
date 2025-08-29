@@ -60,7 +60,7 @@
     
     /* Container */
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
@@ -128,72 +128,45 @@
       border-radius: 24px;
       box-shadow: var(--shadow-strong);
       overflow: hidden;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     
     .hero .container {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      grid-template-rows: auto auto;
+      display: flex;
+      align-items: center;
       gap: 4rem;
       padding: 4rem 3rem;
-      grid-template-areas: 
-        "header header"
-        "content image";
-    }
-    
-    .hero-header {
-      grid-area: header;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    
-    .hero-header h1 {
-      font-size: 2.75rem;
-      font-weight: 800;
-      color: var(--color-text);
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-    
-    .hero-header .highlight {
-      background: linear-gradient(135deg, #f5fdc6, #e3e8c1);
-      padding: 4px 12px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(127, 176, 105, 0.15);
-    }
-    
-    .hero-header .subheadline {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--color-text-light);
-      margin-bottom: 0;
-      line-height: 1.5;
     }
     
     .hero-content {
-      grid-area: content;
-      max-width: 650px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+      flex: 1;
+      max-width: 850px;
     }
     
     .hero-content h1 {
-      font-size: 2.75rem;
+      font-size: 3.5rem;
       font-weight: 800;
       color: var(--color-text);
       margin-bottom: 1.5rem;
-      line-height: 1.2;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
     }
     
     .hero-content .subheadline {
-      font-size: 1.25rem;
-      font-weight: 500;
+      font-size: 1.375rem;
+      font-weight: 400;
       color: var(--color-text-light);
-      margin-bottom: 3rem;
-      line-height: 1.5;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    
+    .highlight-text {
+      background: linear-gradient(135deg, #7fb069, #5a9c4e);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(127, 176, 105, 0.3);
     }
     
     /* Form Container */
@@ -203,7 +176,8 @@
       padding: 2rem;
       border: 1px solid rgba(127, 176, 105, 0.2);
       box-shadow: var(--shadow-soft);
-      max-width: 480px;
+      width: 380px;
+      flex-shrink: 0;
     }
     
     .form-container h3 {
@@ -279,40 +253,9 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      text-align: center;
+      justify-content: center;
       margin-top: 1rem;
       line-height: 1.4;
-    }
-    
-    .hero-illustration {
-      grid-area: image;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      position: relative;
-      min-height: 400px;
-    }
-    
-    .hero-illustration img {
-      max-width: 100%;
-      max-height: 400px;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: var(--shadow-soft);
-    }
-    
-    .illustration-placeholder {
-      width: 100%;
-      max-width: 380px;
-      height: 320px;
-      background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-text-light);
-      font-size: 1rem;
-      font-weight: 600;
     }
     
     /* Benefits Section */
@@ -325,7 +268,7 @@
       border-radius: 24px;
       box-shadow: var(--shadow-strong);
       padding: 3rem;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     
@@ -394,7 +337,7 @@
       border-radius: 24px;
       box-shadow: var(--shadow-strong);
       padding: 3rem;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       text-align: center;
     }
@@ -444,68 +387,91 @@
       color: var(--color-text);
     }
     
-    /* Feature Sections */
-    .feature {
-      padding: 3rem 0;
+    /* Precision AEO GPT Feature Spotlight */
+    #precision-aeo-gpt {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
     }
     
-    .feature-card {
+    .spotlight-card {
       background: var(--color-white);
-      border-radius: 20px;
-      box-shadow: var(--shadow-soft);
-      padding: 2rem;
-      max-width: 1200px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong);
+      padding: 4rem 3rem;
+      max-width: 1000px;
       margin: 0 auto;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      flex-wrap: wrap;
-      border: 1px solid rgba(127, 176, 105, 0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
     
-    .feature-icon {
-      width: 70px;
-      height: 70px;
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+    }
+    
+    .spotlight-icon {
+      width: 100px;
+      height: 100px;
+      background: var(--gradient-primary);
       border-radius: 50%;
-      background: var(--gradient-bg);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      box-shadow: var(--shadow-soft);
+      margin: 0 auto 2rem;
+      font-size: 2.5rem;
+      box-shadow: var(--shadow-strong);
+      animation: pulse-glow 2s ease-in-out infinite;
     }
     
-    .feature-content {
-      flex: 1;
-      min-width: 280px;
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: var(--shadow-strong), 0 0 0 0 rgba(127, 176, 105, 0.4);
+      }
+      50% {
+        box-shadow: var(--shadow-strong), 0 0 0 10px rgba(127, 176, 105, 0.1);
+      }
     }
     
-    .feature-content h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.5rem;
-      font-weight: 700;
+    .spotlight-card h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
       color: var(--color-text);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
     }
     
-    .feature-content p {
-      margin: 0 0 1rem 0;
+    .spotlight-card p {
+      font-size: 1.25rem;
       color: var(--color-text-light);
       line-height: 1.6;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
-    .feature .btn {
+    .spotlight-btn {
       background: var(--gradient-primary);
       color: var(--color-white);
       text-decoration: none;
-      padding: 0.875rem 1.5rem;
+      padding: 1.25rem 3rem;
       border-radius: 12px;
       font-weight: 700;
+      font-size: 1.125rem;
+      display: inline-block;
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
     }
     
-    .feature .btn:hover {
+    .spotlight-btn:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow-strong);
     }
     
     /* AEO Get Smart Section */
@@ -518,7 +484,7 @@
       border-radius: 24px;
       box-shadow: var(--shadow-strong);
       padding: 3rem;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     
@@ -597,7 +563,7 @@
       border-radius: 24px;
       box-shadow: var(--shadow-strong);
       padding: 3rem;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     
@@ -676,7 +642,7 @@
       box-shadow: var(--shadow-strong);
       padding: 3rem;
       text-align: center;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     
@@ -789,6 +755,9 @@
       margin-bottom: 30px;
       flex-wrap: wrap;
       gap: 20px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .results-header h2 {
@@ -841,173 +810,13 @@
       font-weight: 700;
     }
     
-    /* Responsive Design */
-    /* Responsive Design */
-    @media (max-width: 900px) {
-      .benefit-list {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-      
-      .smart-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .smart-item:last-child {
-        grid-column: 1 / -1;
-        max-width: 400px;
-        margin: 0 auto;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      /* Header */
-      header .container {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      .branding {
-        font-size: 1.25rem;
-      }
-      
-      /* Hero */
-      .hero {
-        padding: 4rem 0 3rem;
-      }
-      
-      .hero .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 2.5rem 2rem;
-        gap: 3rem;
-        grid-template-areas: none;
-        grid-template-columns: none;
-      }
-      
-      .hero-header {
-        order: 1;
-      }
-      
-      .hero-content {
-        order: 2;
-        max-width: 100%;
-        grid-area: none;
-      }
-      
-      .hero-illustration {
-        order: 3;
-        grid-area: none;
-        min-height: auto;
-        align-items: center;
-      }
-      
-      .illustration-placeholder {
-        height: 220px;
-        font-size: 0.9rem;
-        max-width: 300px;
-      }
-      
-      /* Benefits */
-      .benefit-list {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      
-      .smart-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .feature-card {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      /* Cards */
-      .benefits-card,
-      .trust-card,
-      .faq-card,
-      .cta-card,
-      .smart-card {
-        padding: 2rem;
-      }
-      
-      .benefits h2,
-      .trust h2,
-      .faq h2 {
-        font-size: 1.875rem;
-      }
-      
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      
-      .cta h2 {
-        font-size: 2rem;
-      }
-      
-      /* Footer */
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .hero-content h1 {
-        font-size: 1.75rem;
-      }
-      
-      .benefits h2,
-      .trust h2,
-      .faq h2 {
-        font-size: 1.5rem;
-      }
-      
-      .cta h2 {
-        font-size: 1.75rem;
-      }
-    }
-    
-    /* Accessibility */
-    :focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 2px;
-    }
-    
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .hero-content {
-      animation: fadeIn 0.8s ease-out;
-    }
-    
-    .benefit-item {
-      animation: fadeIn 0.8s ease-out;
-    }
-    
-    .benefit-item:nth-child(2) {
-      animation-delay: 0.1s;
-    }
-    
-    .benefit-item:nth-child(3) {
-      animation-delay: 0.2s;
-    }
-    
-    /* Score Display and other results styling remains the same */
+    /* Score Display and other results styling */
     .score-display {
       text-align: center;
       margin-bottom: 40px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .score-circle {
@@ -1036,6 +845,9 @@
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 25px;
       margin-bottom: 30px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .category {
@@ -1103,6 +915,9 @@
       padding: 25px;
       border-radius: 12px;
       margin-top: 30px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .recommendations h3 {
@@ -1130,7 +945,7 @@
       padding: 2.5rem;
       margin-top: 30px;
       box-shadow: var(--shadow-soft);
-      max-width: 800px;
+      max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -1152,7 +967,7 @@
     }
     
     .lead-form {
-       display: grid;
+      display: grid;
       gap: 1.5rem;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
@@ -1226,8 +1041,9 @@
       border: 1px solid rgba(127, 176, 105, 0.15);
       border-radius: 12px;
       padding: 20px;
-      margin: 25px 0;
+      margin: 25px auto;
       text-align: center;
+      max-width: 1400px;
     }
     
     .analysis-details h4 {
@@ -1257,6 +1073,192 @@
     .check-item.good {
       background: rgba(127, 176, 105, 0.15);
       border-color: rgba(127, 176, 105, 0.4);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .benefit-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      
+      .smart-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .smart-item:last-child {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      /* Header */
+      header .container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .branding {
+        font-size: 1.25rem;
+      }
+      
+      /* Hero */
+      .hero {
+        padding: 4rem 0 3rem;
+      }
+      
+      .hero .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2.5rem 2rem;
+        gap: 3rem;
+      }
+      
+      .hero-content {
+        max-width: 100%;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.25rem;
+      }
+      
+      .hero-content .subheadline {
+        font-size: 1.125rem;
+      }
+      
+      .form-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.75rem;
+      }
+      
+      .hero-form input,
+      .hero-form button {
+        width: 100%;
+      }
+      
+      .illustration-placeholder {
+        height: 220px;
+        font-size: 0.9rem;
+        max-width: 300px;
+      }
+      
+      /* Benefits */
+      .benefit-list {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .smart-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .feature-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      /* Cards */
+      .benefits-card,
+      .trust-card,
+      .faq-card,
+      .cta-card,
+      .smart-card {
+        padding: 2rem;
+      }
+      
+      .benefits h2,
+      .trust h2,
+      .faq h2 {
+        font-size: 1.875rem;
+      }
+      
+      .cta h2 {
+        font-size: 2rem;
+      }
+      
+      /* Footer */
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .results-header {
+        max-width: 100%;
+      }
+      
+      .score-display {
+        max-width: 100%;
+      }
+      
+      .categories {
+        max-width: 100%;
+        grid-template-columns: 1fr;
+      }
+      
+      .recommendations {
+        max-width: 100%;
+      }
+      
+      .lead-capture {
+        max-width: 100%;
+      }
+      
+      .analysis-details {
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .benefits h2,
+      .trust h2,
+      .faq h2 {
+        font-size: 1.5rem;
+      }
+      
+      .cta h2 {
+        font-size: 1.75rem;
+      }
+    }
+    
+    /* Accessibility */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .hero-content {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .benefit-item {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .benefit-item:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    .benefit-item:nth-child(3) {
+      animation-delay: 0.2s;
     }
     
     /* SR-only for accessibility */
@@ -1337,52 +1339,43 @@
 <section class="hero" id="form-section">
   <div class="hero-card">
     <div class="container">
-      <div class="hero-header">
-        <h1>Is Your Healthcare Website <span class="highlight">Answer-Ready?</span></h1>
+      <div class="hero-content">
+        <h1>Is Your Healthcare Website<br><span class="highlight-text">Answer-Ready?</span></h1>
         <p class="subheadline">
           Get a free, custom AEO report that reveals exactly how AI systems find and cite your healthcare content. 
           Uncover what's working, what's not, and how to rank when patients and HCPs search for medical information.
         </p>
       </div>
       
-      <div class="hero-content">
-        <div class="form-container">
-          <h3>Get Your Free Analysis</h3>
-          <p class="form-subtitle">Join the healthcare companies who've discovered hidden AEO gaps in their content strategy</p>
-          
-          <form id="grader-form" class="hero-form" novalidate>
-            <div class="form-inputs">
-              <input 
-                type="url" 
-                id="website-url"
-                name="website" 
-                placeholder="Enter your website URL" 
-                required
-                autocomplete="url"
-              />
-              <div id="url-preview" class="url-preview" aria-live="polite" style="display:none;"></div>
-              <input 
-                type="email" 
-                id="email"
-                name="email" 
-                placeholder="Enter your email address" 
-                required
-                autocomplete="email"
-              />
-            </div>
-            <button type="submit">Get My Free Analysis</button>
-            <div class="form-note">
-              🚫 No spam — you'll have your report within minutes!
-            </div>
-          </form>
-        </div>
-      </div>
-      
-      <div class="hero-illustration">
-        <img id="hero-image" alt="AEO analysis report preview" style="display:none; width:100%; height:auto;" />
-        <div class="illustration-placeholder">
-          [ Report Preview ]
-        </div>
+      <div class="form-container">
+        <h3>Get Your Free Analysis</h3>
+        <p class="form-subtitle">Join the healthcare companies who've discovered hidden AEO gaps in their content strategy</p>
+        
+        <form id="grader-form" class="hero-form" novalidate>
+          <div class="form-inputs">
+            <input 
+              type="url" 
+              id="website-url"
+              name="website" 
+              placeholder="Enter your website URL" 
+              required
+              autocomplete="url"
+            />
+            <div id="url-preview" class="url-preview" aria-live="polite" style="display:none;"></div>
+            <input 
+              type="email" 
+              id="email"
+              name="email" 
+              placeholder="Enter your email address" 
+              required
+              autocomplete="email"
+            />
+          </div>
+          <button type="submit">Get My Free Analysis</button>
+          <div class="form-note">
+            🚫 No spam — you'll have your report within minutes!
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -1474,7 +1467,7 @@
       <div class="benefit-list">
         <div class="benefit-item">
           <div class="benefit-icon">🏥</div>
-          <h3>Increase Patient & HCP Discovery</h3>
+          <h3>Increase Patient <br>& HCP Discovery</br></h3>
           <p>
             Discover exactly how visible your medical content is to AI assistants that patients and HCPs 
             use for health information, plus Google's medical featured snippets.
@@ -1492,7 +1485,7 @@
         
         <div class="benefit-item">
           <div class="benefit-icon">📋</div>
-          <h3>Get Your Complete Action Plan</h3>
+          <h3>Get Your Complete <br>Action Plan</br></h3>
           <p>
             Receive a detailed report covering clinical content structure, medical accuracy signals, 
             and patient safety considerations — with clear next steps to improve.
@@ -1510,7 +1503,7 @@
     <div class="container">
       <h2>Healthcare AEO Expertise You Can Trust</h2>
       <p>
-        Precision AEO was created by <a href="https://www.precisionaq.com/" style="color: var(--color-accent); text-decoration: none;">Precision AQ's</a>, digital strategy experts, recognized leaders in healthcare content optimization, in response to the growing need for strategies that meet the unique demands of pharmaceutical and biotech companies. We've built our expertise around the complex intersection of compliance, medical content authority, and patient safety considerations.
+        Precision AEO was created by <a href="https://www.precisionaq.com/" style="color: var(--color-accent); text-decoration: none;">Precision AQ's</a>, digital strategy experts, recognized leaders in healthcare content optimization, in response to the growing need for strategies that meet the unique demands of pharmaceutical and biotech companies. We've built our expertise around the complex intersection of compliance, medical content, and patient safety.
       </p>
       <blockquote>
         When we first started working with pharma and biotech teams on their AI search challenges, we kept seeing the same gaps in their YMYL compliance and content authority. That's what inspired us to build this tool — and now we're thrilled to share it with the entire healthcare community.
@@ -1561,18 +1554,14 @@
 </section>
 <!-- FAQ Section End -->
 
-<!-- Precision AEO GPT Feature Start -->
-<section class="feature" id="precision-aeo-gpt">
+<!-- Precision AEO GPT Feature Spotlight -->
+<section id="precision-aeo-gpt">
   <div class="container">
-    <div class="feature-card">
-      <div class="feature-icon">🤖</div>
-      <div class="feature-content">
-        <h2>Precision AEO GPT</h2>
-        <p>Your interactive AEO coach, powered by our complete methodology. Get instant page assessments, copy optimization suggestions, and strategic guidance—all in a conversational interface. Built on our whitepaper, playbook, and checklist.</p>
-      </div>
-      <div>
-        <a class="btn" href="https://chatgpt.com/g/g-68b05a0703588191bfe7b55b1484c8a2-precisionaeo-gpt" target="_blank" rel="noopener noreferrer">Launch AEO GPT</a>
-      </div>
+    <div class="spotlight-card">
+      <div class="spotlight-icon">🤖</div>
+      <h2>Precision AEO GPT</h2>
+      <p>Your interactive AEO coach, powered by our complete methodology. Get instant page assessments, copy optimization suggestions, and strategic guidance—all in a conversational interface.</p>
+      <a class="spotlight-btn" href="https://chatgpt.com/g/g-68b05a0703588191bfe7b55b1484c8a2-precisionaeo-gpt" target="_blank" rel="noopener noreferrer">Launch AEO GPT</a>
     </div>
   </div>
 </section>
@@ -1591,12 +1580,12 @@
           <a href="whitepaper.html" class="btn">View</a>
         </article>
         <article class="smart-item">
-          <h3>Checklist — For AEO Readiness</h3>
+          <h3>Checklist — Essential Checks for AEO</h3>
           <p>A concise, step‑by‑step checklist to confirm your site is answer‑ready.</p>
           <a href="checklist.html" class="btn">View</a>
         </article>
         <article class="smart-item">
-          <h3>Playbook — Jumpstart your AEO Content</h3>
+          <h3>Playbook — Jumpstart Your AEO Content</h3>
           <p>Templates and patterns to write content AI assistants love to cite.</p>
           <a href="playbook.html" class="btn">View</a>
         </article>

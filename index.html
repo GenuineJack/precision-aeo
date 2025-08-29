@@ -1093,40 +1093,101 @@
     
     /* Lead Capture */
     .lead-capture {
-      background: linear-gradient(135deg, var(--color-sage), var(--color-light-green));
-      padding: 30px;
-      border-radius: 16px;
+      background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
+      border: 1px solid rgba(127, 176, 105, 0.2);
+      border-radius: 20px;
+      padding: 2.5rem;
       margin-top: 30px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-soft);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .lead-capture h3 {
       color: var(--color-text);
-      margin-bottom: 15px;
-      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
       font-weight: 700;
+      text-align: center;
     }
     
     .lead-capture p {
-      color: var(--color-text);
-      margin-bottom: 25px;
+      color: var(--color-text-light);
+      margin-bottom: 2rem;
       line-height: 1.6;
+      text-align: center;
+      font-size: 1rem;
     }
     
     .lead-form {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      align-items: end;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      align-items: start;
     }
     
     .lead-form .form-group {
+      display: flex;
+      flex-direction: column;
       margin-bottom: 0;
     }
     
     .lead-form label {
+      font-weight: 600;
+      font-size: 0.9rem;
       color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .lead-form input,
+    .lead-form select,
+    .lead-form textarea {
+      padding: 1rem;
+      font-size: 1rem;
+      border: 2px solid var(--color-very-light-gray);
+      border-radius: 12px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: var(--color-white);
+    }
+    
+    .lead-form input:focus,
+    .lead-form select:focus,
+    .lead-form textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(127, 176, 105, 0.1);
+    }
+    
+    .lead-form textarea {
+      min-height: 120px;
+      resize: vertical;
+      grid-column: 1 / -1;
+    }
+    
+    .lead-form button {
+      grid-column: 1 / -1;
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      border: none;
+      padding: 1.25rem 2rem;
+      font-size: 1.125rem;
       font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+    }
+    
+    .lead-form button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .lead-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
     
     /* Analysis Details */
@@ -1342,34 +1403,32 @@
     
     <form class="lead-form" id="lead-form" novalidate>
       <div class="form-group">
-        <label for="lead-name">Name</label>
+        <label for="lead-name">Full Name</label>
         <input type="text" id="lead-name" required>
       </div>
       <div class="form-group">
-        <label for="lead-email">Email</label>
+        <label for="lead-email">Work Email</label>
         <input type="email" id="lead-email" required>
       </div>
       <div class="form-group">
-        <label for="lead-company">Company</label>
+        <label for="lead-company">Company Name</label>
         <input type="text" id="lead-company" required>
       </div>
       <div class="form-group">
         <label for="company-size">Company Size</label>
         <select id="company-size">
-          <option value="">Select size</option>
+          <option value="">Select company size</option>
           <option value="startup">Startup (1-50)</option>
           <option value="small">Small (51-200)</option>
           <option value="medium">Medium (201-1000)</option>
           <option value="large">Large (1000+)</option>
         </select>
       </div>
-      <div class="form-group" style="grid-column: 1/-1;">
+      <div class="form-group">
         <label for="challenge">What's your biggest content challenge? (optional)</label>
         <textarea id="challenge" placeholder="e.g., Our clinical content isn't ranking well in AI search results, we need better YMYL compliance..."></textarea>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn-primary">Get Expert Help</button>
-      </div>
+      <button type="submit">Get Expert Help</button>
     </form>
   </div>
 </div>

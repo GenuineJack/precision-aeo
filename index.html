@@ -120,7 +120,7 @@
     
     /* Hero Section */
     .hero {
-      padding: 6rem 0 4rem;
+      padding: 6rem 0 5rem;
     }
     
     .hero-card {
@@ -136,19 +136,19 @@
       display: flex;
       align-items: center;
       gap: 4rem;
-      padding: 3rem;
+      padding: 4rem 3rem;
     }
     
     .hero-content {
-      flex: 1;
-      max-width: 600px;
+      flex: 1.2;
+      max-width: 650px;
     }
     
     .hero-content h1 {
       font-size: 2.75rem;
       font-weight: 800;
       color: var(--color-text);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       line-height: 1.2;
     }
     
@@ -156,7 +156,7 @@
       font-size: 1.25rem;
       font-weight: 500;
       color: var(--color-text-light);
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
       line-height: 1.5;
     }
     
@@ -164,13 +164,14 @@
     .form-container {
       background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
       border-radius: 20px;
-      padding: 2.5rem;
+      padding: 2rem;
       border: 1px solid rgba(127, 176, 105, 0.2);
       box-shadow: var(--shadow-soft);
+      max-width: 480px;
     }
     
     .form-container h3 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--color-text);
       margin-bottom: 0.5rem;
@@ -180,8 +181,9 @@
     .form-subtitle {
       color: var(--color-text-light);
       text-align: center;
-      margin-bottom: 2rem;
-      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
     
     .hero-form {
@@ -247,7 +249,7 @@
     }
     
     .hero-illustration {
-      flex: 1;
+      flex: 0.8;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -256,6 +258,7 @@
     
     .hero-illustration img {
       max-width: 100%;
+      max-height: 350px;
       height: auto;
       border-radius: 16px;
       box-shadow: var(--shadow-soft);
@@ -263,8 +266,8 @@
     
     .illustration-placeholder {
       width: 100%;
-      max-width: 400px;
-      height: 300px;
+      max-width: 350px;
+      height: 280px;
       background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
       border: 3px dashed rgba(127, 176, 105, 0.3);
       border-radius: 16px;
@@ -272,19 +275,19 @@
       align-items: center;
       justify-content: center;
       color: var(--color-text-light);
-      font-size: 1.125rem;
+      font-size: 1rem;
       font-weight: 600;
     }
     
     .hero-illustration::before {
       content: '';
       position: absolute;
-      top: -20px;
-      left: -20px;
-      right: -20px;
-      bottom: -20px;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
       background: var(--gradient-primary);
-      border-radius: 24px;
+      border-radius: 20px;
       opacity: 0.1;
       z-index: -1;
     }
@@ -827,7 +830,8 @@
       .hero .container {
         flex-direction: column;
         text-align: center;
-        padding: 2rem;
+        padding: 2.5rem 2rem;
+        gap: 3rem;
       }
       
       .hero-content {
@@ -836,10 +840,17 @@
       
       .hero-content h1 {
         font-size: 2.25rem;
+        margin-bottom: 1.25rem;
       }
       
       .hero-content .subheadline {
         font-size: 1.125rem;
+        margin-bottom: 2rem;
+      }
+      
+      .form-container {
+        max-width: 100%;
+        padding: 1.75rem;
       }
       
       .hero-form input,
@@ -849,7 +860,8 @@
       
       .illustration-placeholder {
         height: 200px;
-        font-size: 1rem;
+        font-size: 0.9rem;
+        max-width: 280px;
       }
       
       /* Benefits */
@@ -1222,13 +1234,13 @@
       <div class="hero-content">
         <h1>Is Your Healthcare Website Answer-Ready?</h1>
         <p class="subheadline">
-          Get a free, custom AEO report tailored for healthcare and life science companies. 
-          Uncover what's working, what's not, and how to rank in an answer-driven world where patients and HCPs search for medical information.
+          Get a free, custom AEO report that reveals exactly how AI systems find and cite your healthcare content. 
+          Uncover what's working, what's not, and how to rank when patients and HCPs search for medical information.
         </p>
         
         <div class="form-container">
           <h3>Get Your Free Analysis</h3>
-          <p class="form-subtitle">Join 500+ healthcare and life science companies who've optimized their content for AI search</p>
+          <p class="form-subtitle">Join 500+ healthcare companies who've discovered hidden AEO gaps in their content strategy</p>
           
           <form id="grader-form" class="hero-form" novalidate>
             <div class="form-inputs">
@@ -1356,28 +1368,28 @@
       <div class="benefit-list">
         <div class="benefit-item">
           <div class="benefit-icon">🏥</div>
-          <h3>Healthcare Content Visibility</h3>
+          <h3>Increase Patient & HCP Discovery</h3>
           <p>
-            Discover how visible your medical content is to AI assistants that patients and HCPs 
-            use for health information, and Google's medical featured snippets.
+            Discover exactly how visible your medical content is to AI assistants that patients and HCPs 
+            use for health information, plus Google's medical featured snippets.
           </p>
         </div>
         
         <div class="benefit-item">
           <div class="benefit-icon">⚕️</div>
-          <h3>YMYL-Compliant Recommendations</h3>
+          <h3>Meet Medical Content Standards</h3>
           <p>
             Get healthcare-specific guidance to improve your content authority, 
-            medical disclaimers, author credentials, and regulatory compliance.
+            medical disclaimers, author credentials, and regulatory compliance for AI systems.
           </p>
         </div>
         
         <div class="benefit-item">
           <div class="benefit-icon">📋</div>
-          <h3>Comprehensive Healthcare Audit</h3>
+          <h3>Get Your Complete Action Plan</h3>
           <p>
             Receive a detailed report covering clinical content structure, medical accuracy signals, 
-            and patient safety considerations — all for free.
+            and patient safety considerations — with clear next steps to improve.
           </p>
         </div>
       </div>
@@ -1392,7 +1404,7 @@
     <div class="container">
       <h2>Healthcare AEO Expertise You Can Trust</h2>
       <p>
-        Precision AEO was developed by the digital experts at <a href="https://www.precisionaq.com/" style="color: var(--color-accent); text-decoration: none;">Precision AQ</a>, leveraging best practices in healthcare content strategy and AI optimization. We understand the unique challenges of YMYL compliance, medical content authority, and patient safety considerations.
+        Precision AEO was developed by the digital experts at <a href="https://www.precisionaq.com/" style="color: var(--color-accent); text-decoration: none;">Precision AQ</a>, with over 3 years helping pharmaceutical and biotech companies improve their AI search performance. We understand the unique challenges of YMYL compliance, medical content authority, and patient safety considerations.
       </p>
       <blockquote>
         When we started helping our pharma and biotech clients with Answer Engine Optimization, we developed this tool to assess their unique YMYL requirements and medical content challenges. We're excited to offer it to the broader healthcare community!
@@ -1402,6 +1414,46 @@
   </div>
 </section>
 <!-- Trust Section End -->
+
+<!-- FAQ Section Start -->
+<section class="faq" id="faq">
+  <div class="faq-card">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <button class="faq-toggle" aria-expanded="false">
+          <span>What is Answer Engine Optimization (AEO)?</span>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <p>Answer Engine Optimization (AEO) is the practice of optimizing your content to be easily understood and cited by AI‑powered search engines like Claude, Perplexity, and Google's AI features. Unlike traditional SEO, AEO focuses on structured data, clear answers, and authoritative signals that help AI systems extract and present your information accurately.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-toggle" aria-expanded="false">
+          <span>How does Precision AEO analyze my website?</span>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <p>Our tool performs comprehensive analysis including page speed testing via Google PageSpeed Insights API, content structure analysis, healthcare compliance checking, and technical SEO auditing. We evaluate six core factors: Content Structure (25%), Authority Signals (20%), Technical Optimization (20%), Content Clarity (15%), YMYL Compliance (10%), and User Experience (10%).</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-toggle" aria-expanded="false">
+          <span>Why is AEO critical for healthcare and life science companies?</span>
+          <span class="toggle-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <p>Healthcare content is classified as YMYL (Your Money or Your Life), requiring the highest standards of authority, accuracy, and trust signals. With clinicians and patients increasingly using AI assistants for medical information, proper AEO ensures your content is accurately cited with appropriate medical disclaimers, author credentials, regulatory compliance, and safety information. Poor AEO can lead to misinformation or missed opportunities to educate your audiences.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FAQ Section End -->
 
 <!-- Precision AEO GPT Feature Start -->
 <section class="feature" id="precision-aeo-gpt">
@@ -1447,53 +1499,13 @@
 </section>
 <!-- AEO Get Smart End -->
 
-<!-- FAQ Section Start -->
-<section class="faq" id="faq">
-  <div class="faq-card">
-    <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      
-      <div class="faq-item">
-        <button class="faq-toggle" aria-expanded="false">
-          <span>What is Answer Engine Optimization (AEO)?</span>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div class="faq-content">
-          <p>Answer Engine Optimization (AEO) is the practice of optimizing your content to be easily understood and cited by AI‑powered search engines like Claude, Perplexity, and Google's AI features. Unlike traditional SEO, AEO focuses on structured data, clear answers, and authoritative signals that help AI systems extract and present your information accurately.</p>
-        </div>
-      </div>
-      
-      <div class="faq-item">
-        <button class="faq-toggle" aria-expanded="false">
-          <span>How does Precision AEO analyze my website?</span>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div class="faq-content">
-          <p>Our tool performs comprehensive analysis including page speed testing via Google PageSpeed Insights API, content structure analysis, healthcare compliance checking, and technical SEO auditing. We evaluate six core factors: Content Structure (25%), Authority Signals (20%), Technical Optimization (20%), Content Clarity (15%), YMYL Compliance (10%), and User Experience (10%).</p>
-        </div>
-      </div>
-      
-      <div class="faq-item">
-        <button class="faq-toggle" aria-expanded="false">
-          <span>Why is AEO critical for healthcare and life science companies?</span>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div class="faq-content">
-          <p>Healthcare content is classified as YMYL (Your Money or Your Life), requiring the highest standards of authority, accuracy, and trust signals. With clinicians and patients increasingly using AI assistants for medical information, proper AEO ensures your content is accurately cited with appropriate medical disclaimers, author credentials, regulatory compliance, and safety information. Poor AEO can lead to misinformation or missed opportunities to educate your audiences.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- FAQ Section End -->
-
 <!-- CTA Section Start -->
 <section class="cta" id="cta-section">
   <div class="cta-card">
     <div class="container">
-      <h2>Ready to Optimize Your Healthcare Content for AI Search?</h2>
-      <p>Join leading pharma, biotech, and medical device companies improving their AI search visibility with Precision AEO</p>
-      <button class="cta-button" id="cta-button">Run My Healthcare AEO Audit</button>
+      <h2>Start Your Healthcare AEO Analysis</h2>
+      <p>Join 500+ healthcare companies already ahead of the AI search curve</p>
+      <button class="cta-button" id="cta-button">Analyze My Healthcare Content</button>
     </div>
   </div>
 </section>

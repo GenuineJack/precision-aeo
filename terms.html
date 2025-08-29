@@ -1,1 +1,517 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Terms of Service | Precision AEO</title><link rel="stylesheet" href="brand.css"></head><body style="font-family:Inter,Arial,sans-serif;max-width:880px;margin:40px auto;padding:0 16px;line-height:1.7;color:#222"><h1>Terms of Service</h1><p>Use Precision AEO responsibly. No warranties; the service is provided "as is." You are responsible for your inputs and outputs. By using the site, you agree to our Privacy Policy.</p><h2>Acceptable Use</h2><p>No abusive, illegal, or unauthorized use.</p><h2>Liability</h2><p>To the fullest extent permitted by law, we disclaim liability for indirect or consequential damages.</p><h2>Changes</h2><p>We may update these Terms; material changes will be posted here.</p><h2>Contact</h2><p>Email: jack.demanche@precisionaq.com</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | Precision AEO</title>
+  
+  <!-- Favicon: magnifying glass emoji -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='14' font-size='16'%3E🔎%3C/text%3E%3C/svg%3E"/>
+  
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared brand variables and button styles -->
+  <link rel="stylesheet" href="brand.css">
+  
+  <style>
+    /* CSS Variables */
+    :root {
+      --color-pale-green: #f5fdc6;
+      --color-sage: #e3e8c1;
+      --color-light-green: #f4f9d2;
+      --color-gray: #d8d8db;
+      --color-light-gray: #cbccd0;
+      --color-very-light-gray: #edeff2;
+      --color-text: #333333;
+      --color-text-light: #555555;
+      --color-white: #ffffff;
+      --color-accent: #7fb069;
+    }
+    
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Base Styles */
+    body {
+      font-family: 'Inter', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Apple Color Emoji', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-white);
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-very-light-gray);
+      padding: 1rem 0;
+      z-index: 1000;
+    }
+    
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .branding {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-text);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    
+    .branding span {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-light);
+      background: var(--color-pale-green);
+      padding: 0.125rem 0.5rem;
+      border-radius: 12px;
+    }
+    
+    header nav a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      margin-left: 1.5rem;
+    }
+    
+    header nav a:hover {
+      color: var(--color-accent);
+    }
+    
+    /* Main Content */
+    main {
+      margin-top: 5rem;
+      padding: 2rem 0;
+      min-height: calc(100vh - 10rem);
+    }
+    
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--color-white);
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .legal-content h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .last-updated {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+    
+    .legal-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--color-accent);
+      padding-left: 1rem;
+    }
+    
+    .legal-content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .legal-content p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+    
+    .legal-content ul, .legal-content ol {
+      margin-bottom: 1rem;
+      margin-left: 1.5rem;
+    }
+    
+    .legal-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+    
+    .legal-content a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+    
+    .legal-content a:hover {
+      text-decoration: underline;
+    }
+    
+    .highlight-box {
+      background: var(--color-pale-green);
+      border-left: 4px solid var(--color-accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .contact-box {
+      background: var(--color-very-light-gray);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    
+    .warning-box {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid #dc2626;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--color-light-gray);
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    footer, footer a {
+      color: var(--color-text-light);
+      font-size: 0.875rem;
+    }
+    
+    footer a {
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    footer a:hover {
+      color: var(--color-text);
+      text-decoration: underline;
+    }
+    
+    .footer-links a {
+      margin: 0 0.75rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header .container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .branding {
+        font-size: 1.25rem;
+      }
+      
+      header nav a {
+        margin: 0 0.75rem;
+      }
+      
+      main {
+        margin-top: 6rem;
+        padding: 1rem 0;
+      }
+      
+      .legal-content {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+      }
+      
+      .legal-content h1 {
+        font-size: 2rem;
+      }
+      
+      .legal-content h2 {
+        font-size: 1.3rem;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="branding">
+      <a href="index.html" style="text-decoration:none;color:inherit;">
+        <img src="assets/brand/PAEO-long_logo.png" alt="Precision AEO" style="height:28px;vertical-align:middle;"/>
+      </a>
+      <span>Beta</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="mailto:jack.demanche@precisionaq.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main>
+  <div class="container">
+    <div class="legal-content">
+      <h1>Terms of Service</h1>
+      <p class="last-updated">Last updated: <span id="last-updated-date"></span></p>
+      
+      <div class="highlight-box">
+        <p><strong>In Brief:</strong> By using Precision AEO, you agree to use our service responsibly for legitimate website analysis. We provide the service "as is" without warranties. You're responsible for your data inputs, and we limit our liability as permitted by law.</p>
+      </div>
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing or using the Precision AEO website analysis service ("Service"), you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of these terms, you may not access the Service.</p>
+
+      <h2>2. Description of Service</h2>
+      <p>Precision AEO provides:</p>
+      <ul>
+        <li>Automated website analysis for Answer Engine Optimization (AEO)</li>
+        <li>Performance scoring and recommendations</li>
+        <li>Technical SEO assessments</li>
+        <li>Content structure evaluation</li>
+        <li>Downloadable PDF reports</li>
+        <li>Educational resources and content</li>
+      </ul>
+
+      <h2>3. User Accounts and Eligibility</h2>
+      <h3>Eligibility</h3>
+      <p>You must be at least 18 years old and have the legal authority to enter into these Terms. If you're using the Service on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+      
+      <h3>Account Information</h3>
+      <p>You are responsible for providing accurate and complete information when using our Service, including valid email addresses and website URLs.</p>
+
+      <h2>4. Acceptable Use Policy</h2>
+      <h3>Permitted Uses</h3>
+      <p>You may use the Service to:</p>
+      <ul>
+        <li>Analyze websites you own or have permission to analyze</li>
+        <li>Generate reports for legitimate business purposes</li>
+        <li>Access educational resources and documentation</li>
+      </ul>
+
+      <h3>Prohibited Uses</h3>
+      <p>You may not:</p>
+      <ul>
+        <li>Analyze websites without proper authorization</li>
+        <li>Use the Service for illegal or unauthorized purposes</li>
+        <li>Attempt to reverse engineer or tamper with the Service</li>
+        <li>Overload our systems with excessive requests</li>
+        <li>Share or resell access to the Service without permission</li>
+        <li>Use the Service to harm, harass, or violate others' rights</li>
+        <li>Submit false, misleading, or fraudulent information</li>
+        <li>Violate any applicable laws or regulations</li>
+      </ul>
+
+      <div class="warning-box">
+        <h3>Rate Limiting and Fair Use</h3>
+        <p>We implement rate limiting to ensure fair usage. Excessive or automated usage may result in temporary restrictions or account suspension.</p>
+      </div>
+
+      <h2>5. Intellectual Property Rights</h2>
+      <h3>Our Content</h3>
+      <p>The Service, including all content, features, functionality, algorithms, and reports, is owned by Precision AEO and protected by intellectual property laws. You may not copy, modify, distribute, or create derivative works without our written permission.</p>
+      
+      <h3>Your Content</h3>
+      <p>You retain ownership of websites and data you submit for analysis. By using the Service, you grant us a limited license to access and analyze this data solely to provide the Service.</p>
+      
+      <h3>Reports and Analysis</h3>
+      <p>Analysis reports generated for your websites are provided for your use. You may not redistribute our proprietary analysis methodologies or algorithms.</p>
+
+      <h2>6. Privacy and Data Protection</h2>
+      <p>Our collection and use of your information is governed by our <a href="privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference. By using the Service, you consent to our data practices as described in the Privacy Policy.</p>
+
+      <h2>7. Service Availability and Modifications</h2>
+      <h3>Service Availability</h3>
+      <p>We strive to maintain Service availability but do not guarantee uninterrupted access. The Service may be temporarily unavailable due to maintenance, updates, or technical issues.</p>
+      
+      <h3>Service Modifications</h3>
+      <p>We reserve the right to modify, suspend, or discontinue the Service (or any part thereof) at any time with or without notice. We will not be liable for any modification, suspension, or discontinuance of the Service.</p>
+
+      <h2>8. Disclaimers and Warranties</h2>
+      <div class="warning-box">
+        <h3>Important: Service Provided "As Is"</h3>
+        <p>The Service is provided on an "as is" and "as available" basis. We make no warranties, express or implied, regarding:</p>
+        <ul>
+          <li>The accuracy or completeness of analysis results</li>
+          <li>The reliability or availability of the Service</li>
+          <li>That the Service will meet your specific requirements</li>
+          <li>That the Service will be error-free or uninterrupted</li>
+        </ul>
+      </div>
+
+      <p>To the fullest extent permitted by law, we disclaim all warranties, including but not limited to:</p>
+      <ul>
+        <li>Merchantability</li>
+        <li>Fitness for a particular purpose</li>
+        <li>Non-infringement</li>
+        <li>Title</li>
+        <li>Quiet enjoyment</li>
+      </ul>
+
+      <h2>9. Limitation of Liability</h2>
+      <p><strong>To the fullest extent permitted by applicable law:</strong></p>
+      
+      <h3>No Consequential Damages</h3>
+      <p>In no event shall Precision AEO be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+      <ul>
+        <li>Loss of profits or revenue</li>
+        <li>Loss of data or information</li>
+        <li>Loss of business opportunities</li>
+        <li>Cost of substitute services</li>
+        <li>Business interruption</li>
+      </ul>
+
+      <h3>Damages Cap</h3>
+      <p>Our total liability for all claims related to the Service shall not exceed the amount you paid us in the 12 months preceding the claim, or $100, whichever is greater.</p>
+
+      <h3>Basis of the Bargain</h3>
+      <p>These limitations reflect the allocation of risk between the parties and form an essential basis of the bargain between us.</p>
+
+      <h2>10. Indemnification</h2>
+      <p>You agree to defend, indemnify, and hold harmless Precision AEO, its officers, directors, employees, and agents from and against any claims, damages, obligations, losses, liabilities, costs, or debt arising from:</p>
+      <ul>
+        <li>Your use of the Service</li>
+        <li>Your violation of these Terms</li>
+        <li>Your violation of any third party's rights</li>
+        <li>Any content or data you submit through the Service</li>
+      </ul>
+
+      <h2>11. Termination</h2>
+      <h3>Termination by You</h3>
+      <p>You may stop using the Service at any time. Contact us if you want your account data deleted.</p>
+      
+      <h3>Termination by Us</h3>
+      <p>We may terminate or suspend your access to the Service immediately, without prior notice, if you:</p>
+      <ul>
+        <li>Breach these Terms</li>
+        <li>Engage in prohibited activities</li>
+        <li>Provide false information</li>
+        <li>Use the Service in a way that could damage our systems or reputation</li>
+      </ul>
+
+      <h3>Effect of Termination</h3>
+      <p>Upon termination, your right to use the Service ceases immediately. Provisions that should survive termination will remain in effect, including intellectual property rights, disclaimers, and limitations of liability.</p>
+
+      <h2>12. Governing Law and Disputes</h2>
+      <h3>Governing Law</h3>
+      <p>These Terms are governed by and construed in accordance with the laws of the State of [TO BE DETERMINED], without regard to conflict of law principles.</p>
+      
+      <h3>Dispute Resolution</h3>
+      <p>Any disputes arising from these Terms or your use of the Service will be resolved through:</p>
+      <ol>
+        <li>Good faith negotiations</li>
+        <li>Mediation if negotiations fail</li>
+        <li>Binding arbitration if mediation is unsuccessful</li>
+      </ol>
+
+      <h3>Jurisdiction</h3>
+      <p>You agree to submit to the personal jurisdiction of the courts located in [TO BE DETERMINED] for any actions not subject to arbitration.</p>
+
+      <h2>13. Changes to Terms</h2>
+      <p>We reserve the right to modify these Terms at any time. We will notify you of material changes by:</p>
+      <ul>
+        <li>Posting the updated Terms on our website with a new "Last updated" date</li>
+        <li>Sending you an email notification (if you have provided your email address)</li>
+        <li>Providing prominent notice on our Service</li>
+      </ul>
+      
+      <p>Your continued use of the Service after changes take effect constitutes acceptance of the new Terms.</p>
+
+      <h2>14. Severability</h2>
+      <p>If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions will remain in full force and effect, and the invalid provision will be replaced with a valid provision that most closely reflects our intent.</p>
+
+      <h2>15. Entire Agreement</h2>
+      <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and Precision AEO regarding the Service and supersede all prior agreements and understandings.</p>
+
+      <h2>16. Assignment</h2>
+      <p>You may not assign or transfer your rights under these Terms without our written consent. We may assign these Terms without restriction.</p>
+
+      <h2>17. Force Majeure</h2>
+      <p>We will not be liable for any failure to perform our obligations due to circumstances beyond our reasonable control, including but not limited to natural disasters, government actions, network failures, or other force majeure events.</p>
+
+      <div class="contact-box">
+        <h2>18. Contact Information</h2>
+        <p>If you have questions about these Terms of Service, please contact us:</p>
+        <p>
+          <strong>Email:</strong> <a href="mailto:jack.demanche@precisionaq.com">jack.demanche@precisionaq.com</a><br>
+          <strong>Subject Line:</strong> Terms of Service Inquiry
+        </p>
+        <p>We will respond to your inquiry within 5 business days.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div>© 2025 Precision AEO. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="mailto:jack.demanche@precisionaq.com">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Set the current date as the last updated date
+document.addEventListener('DOMContentLoaded', function() {
+  const today = new Date();
+  const dateString = today.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+  document.getElementById('last-updated-date').textContent = dateString;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The Future of Search: A Primer on AEO | Precision AEO</title>
+<meta name="description" content="Download Precision AEO's whitepaper on Answer Engine Optimization (AEO) and learn how AI reshapes discovery."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;color:#222}
+.wrap{max-width:1100px;margin:0 auto;padding:16px 24px}
+header,footer{border-bottom:1px solid #edeff2}
+.hero{background:#f5fdc6}
+.hero .wrap{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.hero h1{margin:0 0 8px 0;font-size:2rem}
+.hero p{color:#555;margin:0 0 16px 0}
+.card{background:#fff;border:1px solid #edeff2;border-radius:12px;padding:16px}
+.btn{display:inline-block;background:#333;color:#fff;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:700}
+input,button{font-family:inherit}
+input{width:90%;padding:12px;border:1px solid #dcdfe3;border-radius:8px}
+label{font-weight:600;font-size:.9rem}
+small{color:#555}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.notice{font-size:.85rem;color:#555}
+img.hero{max-width:520px;width:100%;height:auto}
+</style>
+</head>
+<body>
+<header><div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
+  <a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:8px"><img src="assets/brand/PAEO-long_logo.png" alt="Precision AEO" style="height:28px"/></a>
+  <nav><a href="privacy.html" style="margin-right:12px">Privacy</a><a href="terms.html">Terms</a></nav>
+</div></header>
+<section class="hero"><div class="wrap">
+  <div style="flex:1;min-width:280px">
+    <h1>The Future of Search: A Primer on AEO</h1>
+    <p>How AI assistants change discovery — and how to make your pages answer‑ready.</p>
+    <div class="card">
+      <form id="lp-form" novalidate>
+        <div style="display:grid;gap:8px">
+          <div><label for="name">Name</label><input id="name" name="name" required placeholder="Your name"/></div>
+          <div><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@company.com"/></div>
+          <input type="text" name="hp_field" id="hp_field" value="" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true" tabindex="-1"/>
+          <small>By providing your contact information, you consent to receive communications from Precision AEO and its associates. You may opt out at any time.</small>
+          <button class="btn" type="submit">Download the Whitepaper</button>
+        </div>
+      </form>
+      <p id="form-msg" role="status" class="notice" style="display:none;margin-top:8px"></p>
+    </div>
+  </div>
+  <img src="assets/landing/whitepaper_hero.png" alt="Whitepaper cover illustration" class="hero"/>
+</div></section>
+<section><div class="wrap">
+  <div class="grid">
+    <div class="card"><h3>What you'll learn</h3><p class="notice">Core AEO concepts, how AI extracts answers, and how to structure pages for citations.</p></div>
+    <div class="card"><h3>Who it's for</h3><p class="notice">Marketing, content, and SEO teams adapting to AI‑driven discovery.</p></div>
+    <div class="card"><h3>Why it matters</h3><p class="notice">Early movers win answer visibility — this guide shows how to start.</p></div>
+  </div>
+</div></section>
+<footer><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><small>© 2025 Precision AEO</small><div><a href="privacy.html" style="margin-right:12px">Privacy</a><a href="terms.html">Terms</a></div></div></footer>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://hcgrmpgnxnajhachbqcr.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhjZ3JtcGdueG5hamhhY2hicWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4ODgzNzIsImV4cCI6MjA3MTQ2NDM3Mn0.Zn-3tdIqYKNo1B2tDcRQscxj_2SiG4CEiB6wvLGH3-g';
+const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
+const form=document.getElementById('lp-form');
+form.addEventListener('submit',async(e)=>{
+ e.preventDefault();
+ const name=document.getElementById('name').value.trim();
+ const email=document.getElementById('email').value.trim();
+ const hp=document.getElementById('hp_field').value.trim();
+ const msg=document.getElementById('form-msg');
+ msg.style.display='block';
+ if(hp){msg.textContent='Error: invalid submission.';return}
+ if(!validEmail(email)||!name){msg.textContent='Please provide a valid name and email.';return}
+ try{
+   const {error}=await supabase.from('lead_captures').insert([{name,email,source:'whitepaper'}]);
+   if(error){console.error(error);msg.textContent='Could not save lead right now, but your download will start.'}
+ }catch(err){console.error(err)}
+ // open PDF
+ window.open('assets/pdfs/whitepaper.pdf','_blank','noopener');
+ msg.textContent='Thanks! Your download should open in a new tab.';
+});
+</script>
+</body>
+</html>

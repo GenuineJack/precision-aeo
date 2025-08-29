@@ -5,59 +5,537 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>The AEO Readiness Checklist | Precision AEO</title>
 <meta name="description" content="Download the AEO Readiness Checklist from Precision AEO to confirm your site is answer‑ready."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;color:#222}
-.wrap{max-width:1100px;margin:0 auto;padding:16px 24px}
-header,footer{border-bottom:1px solid #edeff2}
-.hero{background:#f5fdc6}
-.hero .wrap{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.hero h1{margin:0 0 8px 0;font-size:2rem}
-.hero p{color:#555;margin:0 0 16px 0}
-.card{background:#fff;border:1px solid #edeff2;border-radius:12px;padding:16px}
-.btn{display:inline-block;background:#333;color:#fff;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:700}
-input,button{font-family:inherit}
-input{width:90%;padding:12px;border:1px solid #dcdfe3;border-radius:8px}
-label{font-weight:600;font-size:.9rem}
-small{color:#555}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.notice{font-size:.85rem;color:#555}
-img.hero{max-width:520px;width:100%;height:auto}
+:root {
+  --color-pale-green: #f5fdc6;
+  --color-sage: #e3e8c1;
+  --color-light-green: #f4f9d2;
+  --color-gray: #d8d8db;
+  --color-light-gray: #cbccd0;
+  --color-very-light-gray: #edeff2;
+  --color-text: #333333;
+  --color-text-light: #555555;
+  --color-white: #ffffff;
+  --color-accent: #7fb069;
+  --gradient-primary: linear-gradient(135deg, #7fb069 0%, #5a9c4e 100%);
+  --gradient-bg: linear-gradient(135deg, #f5fdc6 0%, #e3e8c1 100%);
+  --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--gradient-bg);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(127, 176, 105, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo img {
+  height: 32px;
+}
+
+/* Main Content */
+.main-content {
+  padding: 4rem 0 2rem;
+}
+
+.landing-card {
+  background: var(--color-white);
+  border-radius: 24px;
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem;
+}
+
+.hero-content {
+  padding-right: 2rem;
+}
+
+.hero-content h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.hero-content .subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-light);
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.hero-visual {
+  position: relative;
+  text-align: center;
+}
+
+.hero-visual img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: var(--gradient-primary);
+  border-radius: 24px;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+/* Form Styling */
+.form-container {
+  background: linear-gradient(135deg, #f8fffe 0%, #f0f9f6 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid rgba(127, 176, 105, 0.2);
+}
+
+.form-container h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.form-subtitle {
+  color: var(--color-text-light);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--color-very-light-gray);
+  border-radius: 12px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: var(--color-white);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(127, 176, 105, 0.1);
+}
+
+.cta-button {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 1.25rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-note {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.4;
+}
+
+/* Benefits Section */
+.benefits-section {
+  background: var(--color-white);
+  padding: 3rem;
+  border-top: 1px solid var(--color-very-light-gray);
+}
+
+.benefits-headline {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.benefit-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fafffe 0%, #f5faf8 100%);
+  border: 1px solid rgba(127, 176, 105, 0.1);
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.benefit-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+}
+
+.benefit-card h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+.benefit-card p {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.cta-section {
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 2rem;
+  background: var(--gradient-bg);
+  border-radius: 20px;
+  border: 1px solid rgba(127, 176, 105, 0.2);
+}
+
+.cta-section h2 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  font-size: 1.125rem;
+  color: var(--color-text-light);
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-secondary-button {
+  background: var(--color-white);
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-secondary-button:hover {
+  background: var(--color-accent);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Footer */
+footer {
+  background: var(--color-white);
+  border-top: 1px solid var(--color-very-light-gray);
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.footer-links a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  margin-left: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+}
+
+/* Status Message */
+.status-message {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+  display: none;
+}
+
+.status-message.success {
+  background: rgba(127, 176, 105, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(127, 176, 105, 0.3);
+}
+
+.status-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .hero-content {
+    padding-right: 0;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.25rem;
+  }
+  
+  .hero-content .subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .form-container {
+    padding: 2rem;
+  }
+  
+  .benefits-section {
+    padding: 2rem;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-card {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.benefit-card {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.benefit-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.benefit-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
 </style>
 </head>
 <body>
-<header><div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
-  <a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:8px"><img src="assets/brand/PAEO-long_logo.png" alt="Precision AEO" style="height:28px"/></a>
-</div></header>
-<section class="hero"><div class="wrap">
-  <div style="flex:1;min-width:280px">
-    <h1>The AEO Readiness Checklist</h1>
-    <p>Confirm the fundamentals that make your pages easy for AI to parse and quote.</p>
-    <div class="card">
-      <form id="lp-form" novalidate>
-        <div style="display:grid;gap:8px">
-          <div><label for="name">Name</label><input id="name" name="name" required placeholder="Your name"/></div>
-          <div><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@company.com"/></div>
-          <input type="text" name="hp_field" id="hp_field" value="" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true" tabindex="-1"/>
-          <small>By providing your contact information, you consent to receive communications from Precision AEO and its associates. You may opt out at any time.</small>
-          <button class="btn" type="submit">Download the Checklist</button>
-        </div>
-      </form>
-      <p id="form-msg" role="status" class="notice" style="display:none;margin-top:8px"></p>
+<header>
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html" style="text-decoration:none;">
+          <img src="assets/brand/PAEO-long_logo.png" alt="Precision AEO" />
+        </a>
+      </div>
     </div>
   </div>
-  <img src="assets/landing/checklist_hero.png" alt="Checklist illustration" class="hero"/>
-</div></section>
-<section><div class="wrap">
-  <div class="grid">
-    <div class="card"><h3>What you'll get</h3><p class="notice">A concise list of technical, content, and authority checks for answer‑ready pages.</p></div>
-    <div class="card"><h3>Use it weekly</h3><p class="notice">Turn it into a simple QA step for every page you publish.</p></div>
-    <div class="card"><h3>Shareable</h3><p class="notice">Perfect for enabling content, dev, and SEO partners around a single checklist.</p></div>
+</header>
+
+<main class="main-content">
+  <div class="container">
+    <div class="landing-card">
+      <div class="hero-section">
+        <div class="hero-content">
+          <h1>Is Your Site Ready for AI Search?</h1>
+          <p class="subtitle">Get our comprehensive AEO readiness checklist and find out in just 5 minutes</p>
+          
+          <div class="form-container">
+            <h3>Download Your Free Checklist</h3>
+            <p class="form-subtitle">Join smart marketers who are auditing their sites before the competition catches up</p>
+            
+            <form id="lp-form" class="form-grid" novalidate>
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input id="name" name="name" required placeholder="Enter your full name" />
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Work Email</label>
+                <input id="email" name="email" type="email" required placeholder="you@company.com" />
+              </div>
+              
+              <input type="text" name="hp_field" id="hp_field" value="" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true" tabindex="-1"/>
+              
+              <button class="cta-button" type="submit">Get My Free Checklist</button>
+              
+              <p class="form-note">
+                By downloading, you agree to receive communications from Precision AEO. 
+                You can unsubscribe at any time. We respect your privacy.
+              </p>
+            </form>
+            
+            <div id="form-msg" class="status-message" role="status"></div>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <img src="assets/landing/checklist_hero.png" alt="AEO Readiness Checklist Preview" />
+        </div>
+      </div>
+      
+      <div class="benefits-section">
+        <h2 class="benefits-headline">What Makes This Checklist Essential?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">✅</div>
+            <h4>Quick & Actionable</h4>
+            <p>Complete audit in under 10 minutes with clear pass/fail criteria for each critical AEO factor.</p>
+          </div>
+          
+          <div class="benefit-card">
+            <div class="benefit-icon">🎯</div>
+            <h4>Team-Ready</h4>
+            <p>Perfect for sharing with content, dev, and SEO teams - everyone stays aligned on AEO priorities.</p>
+          </div>
+          
+          <div class="benefit-card">
+            <div class="benefit-icon">🚀</div>
+            <h4>Immediate Impact</h4>
+            <p>Start implementing improvements today and see better AI search visibility within weeks.</p>
+          </div>
+        </div>
+        
+        <div class="cta-section">
+          <h2>Ready to Audit Your Site?</h2>
+          <p>Don't let competitors get ahead while your site stays invisible to AI search. Get your checklist now.</p>
+          <button class="cta-secondary-button" onclick="document.getElementById('name').focus()">
+            Download My Checklist
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-</div></section>
-<footer><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><small>© 2025 Precision AEO</small><div><a href="privacy.html" style="margin-right:12px">Privacy</a><a href="terms.html">Terms</a></div></div></footer>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div>© 2025 Precision AEO. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = 'https://hcgrmpgnxnajhachbqcr.supabase.co';
@@ -96,16 +574,19 @@ form.addEventListener('submit', async (e) => {
     const msg = document.getElementById('form-msg');
     
     msg.style.display = 'block';
+    msg.className = 'status-message';
     msg.textContent = 'Submitting...';
     
     // Honeypot spam check
     if (hp) {
+        msg.className = 'status-message error';
         msg.textContent = 'Error: invalid submission.';
         return;
     }
     
     // Validate inputs
     if (!validEmail(email) || !name) {
+        msg.className = 'status-message error';
         msg.textContent = 'Please provide a valid name and email.';
         return;
     }
@@ -127,9 +608,11 @@ form.addEventListener('submit', async (e) => {
         
         if (error) {
             console.error('❌ Database save failed:', error);
+            msg.className = 'status-message error';
             msg.textContent = `Database error, but your download will start anyway.`;
         } else {
             console.log('✅ Saved successfully:', data);
+            msg.className = 'status-message success';
             msg.textContent = 'Thanks! Your download should open in a new tab.';
         }
         
@@ -143,6 +626,7 @@ form.addEventListener('submit', async (e) => {
         
     } catch (err) {
         console.error('❌ Unexpected error:', err);
+        msg.className = 'status-message error';
         msg.textContent = `Error: ${err.message}. Download will still start.`;
         
         // Still provide download even if save fails

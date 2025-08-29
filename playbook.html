@@ -58,27 +58,99 @@ img.hero{max-width:520px;width:100%;height:auto}
 </div></section>
 <footer><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><small>© 2025 Precision AEO</small><div><a href="privacy.html" style="margin-right:12px">Privacy</a><a href="terms.html">Terms</a></div></div></footer>
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
-const SUPABASE_URL='https://hcgrmpgnxnajhachbqcr.supabase.co';
-const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhjZ3JtcGdueG5hamhhY2hicWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4ODgzNzIsImV4cCI6MjA3MTQ2NDM3Mn0.Zn-3tdIqYKNo1B2tDcRQscxj_2SiG4CEiB6wvLGH3-g';
-const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
-const form=document.getElementById('lp-form');
-form.addEventListener('submit',async(e)=>{
- e.preventDefault();
- const name=document.getElementById('name').value.trim();
- const email=document.getElementById('email').value.trim();
- const hp=document.getElementById('hp_field').value.trim();
- const msg=document.getElementById('form-msg');
- msg.style.display='block';
- if(hp){msg.textContent='Error: invalid submission.';return}
- if(!validEmail(email)||!name){msg.textContent='Please provide a valid name and email.';return}
- try{
-   const {error}=await supabase.from('lead_captures').insert([{name,email,source:'playbook'}]);
-   if(error){console.error(error);msg.textContent='Could not save lead right now, but your download will start.'}
- }catch(err){console.error(err)}
- window.open('assets/pdfs/playbook.pdf','_blank','noopener');
- msg.textContent='Thanks! Your download should open in a new tab.';
+const SUPABASE_URL = 'https://hcgrmpgnxnajhachbqcr.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhjZ3JtcGdueG5hamhhY2hicWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4ODgzNzIsImV4cCI6MjA3MTQ2NDM3Mn0.Zn-3tdIqYKNo1B2tDcRQscxj_2SiG4CEiB6wvLGH3-g';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+function validEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+// Test connection when page loads
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const { data, error } = await supabase
+            .from('landing_page_signups')
+            .select('count', { count: 'exact', head: true });
+        
+        if (error) {
+            console.error('❌ Database connection failed:', error);
+        } else {
+            console.log('✅ Database connected successfully');
+        }
+    } catch (err) {
+        console.error('❌ Connection test failed:', err);
+    }
+});
+
+const form = document.getElementById('lp-form');
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const hp = document.getElementById('hp_field').value.trim();
+    const msg = document.getElementById('form-msg');
+    
+    msg.style.display = 'block';
+    msg.textContent = 'Submitting...';
+    
+    // Honeypot spam check
+    if (hp) {
+        msg.textContent = 'Error: invalid submission.';
+        return;
+    }
+    
+    // Validate inputs
+    if (!validEmail(email) || !name) {
+        msg.textContent = 'Please provide a valid name and email.';
+        return;
+    }
+    
+    // Figure out which page this is
+    let source = 'unknown';
+    if (window.location.pathname.includes('checklist')) source = 'checklist';
+    else if (window.location.pathname.includes('playbook')) source = 'playbook';
+    else if (window.location.pathname.includes('whitepaper')) source = 'whitepaper';
+    
+    try {
+        console.log('💾 Saving to database:', { name, email, source });
+        
+        // Save to new table
+        const { data, error } = await supabase
+            .from('landing_page_signups')
+            .insert([{ name, email, source }])
+            .select();
+        
+        if (error) {
+            console.error('❌ Database save failed:', error);
+            msg.textContent = `Database error, but your download will start anyway.`;
+        } else {
+            console.log('✅ Saved successfully:', data);
+            msg.textContent = 'Thanks! Your download should open in a new tab.';
+        }
+        
+        // Open the PDF download
+        let pdfUrl = 'assets/pdfs/checklist.pdf'; // default
+        if (source === 'playbook') pdfUrl = 'assets/pdfs/playbook.pdf';
+        else if (source === 'whitepaper') pdfUrl = 'assets/pdfs/whitepaper.pdf';
+        
+        window.open(pdfUrl, '_blank', 'noopener');
+        form.reset();
+        
+    } catch (err) {
+        console.error('❌ Unexpected error:', err);
+        msg.textContent = `Error: ${err.message}. Download will still start.`;
+        
+        // Still provide download even if save fails
+        let pdfUrl = 'assets/pdfs/checklist.pdf';
+        if (source === 'playbook') pdfUrl = 'assets/pdfs/playbook.pdf';
+        else if (source === 'whitepaper') pdfUrl = 'assets/pdfs/whitepaper.pdf';
+        window.open(pdfUrl, '_blank', 'noopener');
+    }
 });
 </script>
 </body>

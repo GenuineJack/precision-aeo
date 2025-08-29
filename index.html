@@ -133,18 +133,51 @@
     }
     
     .hero .container {
-      display: flex;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-rows: auto auto;
       gap: 4rem;
       padding: 4rem 3rem;
+      grid-template-areas: 
+        "header header"
+        "content image";
+    }
+    
+    .hero-header {
+      grid-area: header;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-header h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .hero-header .highlight {
+      background: linear-gradient(135deg, #f5fdc6, #e3e8c1);
+      padding: 4px 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(127, 176, 105, 0.15);
+    }
+    
+    .hero-header .subheadline {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--color-text-light);
+      margin-bottom: 0;
+      line-height: 1.5;
     }
     
     .hero-content {
-      flex: 1.2;
+      grid-area: content;
       max-width: 650px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
     }
     
     .hero-content h1 {
@@ -252,12 +285,12 @@
     }
     
     .hero-illustration {
-      flex: 0.8;
+      grid-area: image;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       position: relative;
-      padding-top: 15rem;
+      min-height: 400px;
     }
     
     .hero-illustration img {
@@ -844,34 +877,31 @@
       }
       
       .hero .container {
+        display: flex;
         flex-direction: column;
+        align-items: center;
         text-align: center;
         padding: 2.5rem 2rem;
         gap: 3rem;
+        grid-template-areas: none;
+        grid-template-columns: none;
+      }
+      
+      .hero-header {
+        order: 1;
       }
       
       .hero-content {
+        order: 2;
         max-width: 100%;
+        grid-area: none;
       }
       
-      .hero-content h1 {
-        font-size: 2.25rem;
-        margin-bottom: 1.25rem;
-      }
-      
-      .hero-content .subheadline {
-        font-size: 1.125rem;
-        margin-bottom: 2rem;
-      }
-      
-      .form-container {
-        max-width: 100%;
-        padding: 1.75rem;
-      }
-      
-      .hero-form input,
-      .hero-form button {
-        width: 100%;
+      .hero-illustration {
+        order: 3;
+        grid-area: none;
+        min-height: auto;
+        align-items: center;
       }
       
       .illustration-placeholder {
@@ -1307,13 +1337,15 @@
 <section class="hero" id="form-section">
   <div class="hero-card">
     <div class="container">
-      <div class="hero-content">
-        <h1>Is Your Healthcare Website Answer-Ready?</h1>
+      <div class="hero-header">
+        <h1>Is Your Healthcare Website <span class="highlight">Answer-Ready?</span></h1>
         <p class="subheadline">
           Get a free, custom AEO report that reveals exactly how AI systems find and cite your healthcare content. 
           Uncover what's working, what's not, and how to rank when patients and HCPs search for medical information.
         </p>
-        
+      </div>
+      
+      <div class="hero-content">
         <div class="form-container">
           <h3>Get Your Free Analysis</h3>
           <p class="form-subtitle">Join the healthcare companies who've discovered hidden AEO gaps in their content strategy</p>
@@ -1481,7 +1513,7 @@
         Precision AEO was created by <a href="https://www.precisionaq.com/" style="color: var(--color-accent); text-decoration: none;">Precision AQ's</a>, digital strategy experts, recognized leaders in healthcare content optimization, in response to the growing need for strategies that meet the unique demands of pharmaceutical and biotech companies. We've built our expertise around the complex intersection of compliance, medical content authority, and patient safety considerations.
       </p>
       <blockquote>
-        When we first started working with pharma and biotech teams on their AI search challenges, we kept seeing the same gaps in their YMYL compliance and content authority. That's what inspired us to build this tool – and now we're thrilled to share it with the entire healthcare community.
+        When we first started working with pharma and biotech teams on their AI search challenges, we kept seeing the same gaps in their YMYL compliance and content authority. That's what inspired us to build this tool — and now we're thrilled to share it with the entire healthcare community.
         <cite> — Jack D. AVP Digital Strategy, Precision AQ</cite>
       </blockquote>
     </div>
